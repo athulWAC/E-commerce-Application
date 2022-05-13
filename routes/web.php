@@ -44,5 +44,8 @@ Route::get('order', [AdminController::class, 'order'])->name('order');
 Route::post('getamount', [AdminController::class, 'getAmount'])->name('getAmount');
 Route::post('addOrder', [AdminController::class, 'addOrder'])->name('addOrder');
 Route::get('invoice', [AdminController::class, 'invoice'])->name('invoice');
+Route::get('orderDatatable', [AdminController::class, 'orderDatatable'])->name('orderDatatable');
+
+
 
 // Route::post('login', [AdminController::class, 'login'])->name('admin.login');

@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 // use App\Models\ProductDatatable;
 
+use App\Models\Category;
 use App\Models\Product;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -58,7 +59,11 @@ class ProductDatatable extends DataTable
      */
     public function query(Product $model)
     {
+        // $id = $this->id;
         return $model->newQuery();
+
+        // ->select('products.id as id', 'products.name as productname', 'price', 'categories.name as categoryname')
+        // ->leftJoin('categories', 'categories.id', '=', 'products.category_id');
     }
 
     /**
@@ -73,13 +78,11 @@ class ProductDatatable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-
             ->parameters([
-                'dom' => 'lBrti',
-                // 'buttons' => ['csv', 'print'],
+                'dom' => 'lBrtip',
                 'ordering' => false,
                 'buttons' => ['csv', 'excel'],
-                'pageLength' => 4
+                'pageLength' => 10
                 // , 'excel', 'pdf', 'print', 'reset', 'reload'
             ]);
     }
@@ -94,11 +97,7 @@ class ProductDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+
             Column::make('id')->orderable(false),
             Column::make('name')->orderable(false),
             Column::make('category')->orderable(false)->sWidth('200px'),
@@ -108,12 +107,6 @@ class ProductDatatable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-
-            // Column::make('state'),
-            // Column::make('product_id')->orderable(false)->searchable(false)->sWidth('200px'),
-            // Column::make('quantity')->orderable(false)->sWidth('200px'),
-            // Column::make('remove')->orderable(false)->sWidth('200px'),
-
 
         ];
     }

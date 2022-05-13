@@ -59,10 +59,9 @@ class AdminRepos
 
     public static function Productdelete($request)
     {
-        $id = $request->product_id;
-
-
-
+        $id = $request->id;
+        // dd($id);
+        Product::where('id', $id)->delete();
         return;
     }
 

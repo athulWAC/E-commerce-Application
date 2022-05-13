@@ -138,7 +138,9 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ route('deleteProduct') }}",
-                    data: id,
+                    data: {
+                        id: id
+                    },
                     success: function(data) {
                         console.log('Submission was successful.');
                         console.log(data);

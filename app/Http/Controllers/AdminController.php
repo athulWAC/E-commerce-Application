@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ProductDatatable;
 use App\Models\Category;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Product;
 use App\Repositories\AdminRepos;
@@ -139,9 +140,51 @@ class AdminController extends Controller
 
     public function deleteProduct(Request $request)
     {
-        dd($request);
+        // dd($request);
         AdminRepos::Productdelete($request);
         return redirect()->route('product');
+    }
+
+    public function orderDatatable(Request $request)
+    {
+        $draw = $request->get('draw');
+        $search = $request->get('search');
+        $statusfilter = $request->get('status');
+        $statusfilter = $request->get('status');
+        $sortColumn = $request->order[0]['column'] ?? 3;
+        $sortDir = ($request->order[0]['dir'] ?? 'desc') == 'desc' ? 'DESC' : 'ASC';
+
+        $invoice = Invoice::select([
+            'invoices.id',
+            'invoices.total',
+            'invoices.created_at',
+            'orders.customer_name',
+            'orders.phone',
+            'products.name as product_name'
+
+        ])
+            ->leftJoin('orders', 'orders.id', '=', 'invoices.order_id')
+            ->leftJoin('order_details', 'order_details.order_id', '=', 'orders.id')
+            ->leftJoin('products', 'products.id', '=', 'order_details.product_id')->get();
+        // ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
+        // ->leftJoin('order_details', 'order_details.order_id', '=', 'orders.id')
+
+
+        // $invoice = Invoice::select('total')->get();
+
+        // dd($invoice);
+        $total_request =    $invoice->count();
+        // dd($total_request);
+
+
+        $filteredCount = $invoice->count();
+        $data = array(
+            'draw' => $draw,
+            'recordsTotal' => $total_request,
+            'recordsFiltered' => $filteredCount,
+            'data' => $invoice,
+        );
+        return response()->json($data);
     }
 
 

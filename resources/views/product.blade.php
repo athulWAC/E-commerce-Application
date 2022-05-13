@@ -109,7 +109,7 @@
             frm.submit(function(e) {
 
                 e.preventDefault();
-                alert('hi');
+                // alert('hi');
                 $.ajax({
                     type: frm.attr('method'),
                     url: frm.attr('action'),
@@ -132,7 +132,7 @@
 
             $(document).on('click', '.deleteProduct', function(e) {
                 e.preventDefault();
-                alert('del');
+                // alert('del');
                 var id = $(this).data('id');
                 alert(id);
                 $.ajax({

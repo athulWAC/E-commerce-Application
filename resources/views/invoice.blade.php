@@ -30,8 +30,8 @@
                                         <th scope="col">orderid</th>
                                         <th scope="col">customer Name</th>
                                         <th scope="col">Phone</th>
-                                        <th scope="col">Net Amount</th>
                                         <th scope="col">Order Date</th>
+                                        <th scope="col">Net Amount</th>
                                         {{-- <th scope="col">Actions</th> --}}
                                     </tr>
                                 </thead>

@@ -37,8 +37,8 @@ class ProductDatatable extends DataTable
 
         $dataTable->editColumn('action', function (Product $product) {
             $id  = $product->id;
-
-            return '<a href="http://localhost/invoice-system/product/edit/' . $id . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
+            $base_url = env('APP_URL');
+            return '<a href="' . $base_url . 'product/edit/' . $id . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
 
             <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn  "><i class="bi bi-trash"></i></button>';
         });

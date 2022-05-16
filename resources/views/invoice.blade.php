@@ -5,7 +5,6 @@
 
 
     {{-- hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh --}}
-    {{-- @dd($invoices) --}}
     {{-- @foreach ($invoices as $invoice)
 
     @endforeach --}}
@@ -19,10 +18,6 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-
-
-
-
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -39,22 +34,16 @@
 
                                     <tr>
                                         {{-- @foreach ($invoices as $invoice) --}}
-                                        <td scope="row">{{ $invoices['orderid'] }}</td>
-                                        <td scope="row">{{ $invoices['Customer_name'] }}</td>
-                                        <td scope="row">{{ $invoices['Phone_number'] }}</td>
-                                        <td scope="row">{{ $invoices['order_date'] }}</td>
-                                        <td scope="row">{{ $invoices['total_amount'] }}</td>
+                                        <td scope="row">{{ $invoice->order_id }}</td>
+                                        <td scope="row">{{ $invoice->order->customer_name }}</td>
+                                        <td scope="row">{{ $invoice->order->phone }}</td>
+                                        <td scope="row">{{ date('d-m-Y', strtotime($invoice->order->created_at)) }}
+                                        </td>
+                                        <td scope="row">Rs.{{ $invoice->total }}</td>
                                         {{-- @endforeach --}}
                                     </tr>
                                 </tbody>
                             </table>
-
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -62,35 +51,7 @@
 
         </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection
-
-
 @push('JS')
-
-
-
-
 
 @endpush

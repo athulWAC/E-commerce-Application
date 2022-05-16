@@ -67,29 +67,13 @@ class AdminRepos
 
 
 
-
-
-
-
-
-
-
-
-
-
     public static function orderInsert($request)
     {
-
-
         // $order = Order::with('orderDetails')->get();
         // dd($order);
         // $net_amount = $order->orderDetails->productdetails->price;
         // dd($net_amount);
-
-
-
         // dd($request);
-
         $id = Order::count();
         if ($id == 0) {
             $orderid = 1;
@@ -139,5 +123,22 @@ class AdminRepos
 
         // $invoice =  Invoice::where('id', $orderid)->with('order')->get();
         return  $data;
+    }
+
+
+
+    public static function orderDelete($request)
+    {
+        $order_id = $request->id;
+        $order_delete =  Order::where('id', $order_id)->delete();
+        return $order_delete;
+    }
+
+
+    public static function invoiceView($id)
+    {
+        $invoice_id = $id;
+        $invoice = Invoice::with('order')->where('id', $invoice_id)->first();
+        return $invoice;
     }
 }

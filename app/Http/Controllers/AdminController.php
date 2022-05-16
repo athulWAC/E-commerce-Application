@@ -154,28 +154,21 @@ class AdminController extends Controller
         $sortColumn = $request->order[0]['column'] ?? 3;
         $sortDir = ($request->order[0]['dir'] ?? 'desc') == 'desc' ? 'DESC' : 'ASC';
 
-        $invoice = Invoice::select([
-            'invoices.id',
+        $invoice = Order::select([
+            'invoices.id as invoice_id',
             'invoices.total',
             'invoices.created_at',
             'orders.customer_name',
             'orders.phone',
-            'products.name as product_name'
+            'orders.id as order_id'
+            // 'products.name as product_name'
 
         ])
-            ->leftJoin('orders', 'orders.id', '=', 'invoices.order_id')
-            ->leftJoin('order_details', 'order_details.order_id', '=', 'orders.id')
-            ->leftJoin('products', 'products.id', '=', 'order_details.product_id')->get();
-        // ->leftJoin('orders', 'orders.id', '=', 'order_details.order_id')
-        // ->leftJoin('order_details', 'order_details.order_id', '=', 'orders.id')
-
-
+            ->leftJoin('invoices', 'invoices.order_id', '=', 'orders.id',)->get();
         // $invoice = Invoice::select('total')->get();
-
         // dd($invoice);
         $total_request =    $invoice->count();
         // dd($total_request);
-
 
         $filteredCount = $invoice->count();
         $data = array(
@@ -188,6 +181,18 @@ class AdminController extends Controller
     }
 
 
+    public function deleteOrder(Request $request)
+    {
+        $data =  AdminRepos::orderDelete($request);
+        return response()->json($data);
+    }
+
+    public function invoice($id)
+    {
+        // dd($id);
+        $invoice =  AdminRepos::invoiceView($id);
+        return view('invoice', compact('invoice'));
+    }
 
 
 
@@ -206,18 +211,14 @@ class AdminController extends Controller
 
     public function addOrder(Request $request)
     {
+        // dd($request);
+        $request->validate([
+            'customer' => 'required',
+            'phone' => 'required',
+        ]);
         $invoices = AdminRepos::orderInsert($request);
         return view('invoice', compact('invoices'));
     }
-
-    // public function addOrder(Request $request)
-    // {
-    //     $invoive = AdminRepos::orderInsert($request);
-    //     return redirect()->back();
-    // }
-    // invoice
-
-
 
     /**
      * Display the specified resource.

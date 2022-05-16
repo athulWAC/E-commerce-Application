@@ -1,7 +1,9 @@
 @extends('layout')
 
 @section('content')
+
     <section id="basic-horizontal-layouts">
+    {{-- <section id="basic-input-groups" class="basic-choices"> --}}
         <div class="row match-height">
             {{-- <div class="col-md-6 col-12"> --}}
             <div class="col-10">
@@ -11,28 +13,33 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal" method="post" action="{{ route('addOrder') }}"
+                            <form class="form form-horizontal " method="post" action="{{ route('addOrder') }}"
                                 id="orderForm" name="orderForm">
                                 @csrf
                                 <div class="form-body">
 
-                                    <div class="col-3 mb-1">
-                                        <div class="input-group mb-3">
-                                            {{-- <label class="input-group-text" for="state">Customer* </label> --}}
-                                                <input type="text" class="form-control" placeholder="Customer"
-                                                name="customer" id="customer_0" value="" aria-label="quantity"
-                                                aria-describedby="basic-addon1">
-                                        </div>
-                                    </div>
+                                    <div class="row">
 
-                                    <div class="col-3 mb-1">
-                                        <div class="input-group mb-3">
-                                            {{-- <label class="input-group-text" for="state">Customer* </label> --}}
-                                                <input type="text" class="form-control" placeholder="Phone"
-                                                name="phone" id="phone_0" value="" aria-label="quantity"
-                                                aria-describedby="basic-addon1">
+                                        <div class="col-3 mb-1">
+                                            {{-- <div class="input-group mb-3"> --}}
+                                                {{-- <label class="input-group-text" for="state">Customer* </label> --}}
+                                                    <input type="text" class="form-control" placeholder="Customer"
+                                                    name="customer" id="customer" value="" aria-label="customer"
+                                                    aria-describedby="basic-addon1"><br>
+                                            {{-- </div> --}}
                                         </div>
-                                    </div>
+
+                                        <div class="col-3 mb-1">
+                                            {{-- <div class="input-group mb-3"> --}}
+                                                {{-- <label class="input-group-text" for="state">Customer* </label> --}}
+                                                    <input type="text" class="form-control" placeholder="Phone"
+                                                    name="phone" id="phone" value="" aria-label="phone"
+                                                    aria-describedby="basic-addon1"><br>
+                                            {{-- </div> --}}
+                                        </div>
+
+                                    </div><br>
+
 
 
 
@@ -43,7 +50,7 @@
                                         <div class="col-4 mb-1">
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text" for="state">Product* </label>
-                                                <select class="form-select product_select" id="product0" data-id="amount0" name="product[]">
+                                                <select class="form-select product_select" id="product0" data-id="amount0" name="product[]" >
                                                     <option value=" ">Select a Product</option>
                                                     @foreach ($products as $product)
                                                         <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -86,7 +93,7 @@
 
                                 </div>
 
-                                <div class="text-end"> Total : 8765 </div>
+                                <div class="text-end"> Total : <span id="total">0000</span> </div>
                                 <input class="form-control col-1 btn btn-primary" type="submit" name="submit" id="submit" value="submit">
                                 {{-- <button class="form-control col-2" >submit</button> --}}
                             </form>
@@ -109,16 +116,16 @@
             <div class="col-10">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">invoice list</h4>
+                        <h4 class="card-title">Orders list</h4>
                     </div>
                     <div class="card-content">
-                        <div class="card-body">
+                        <div class="card-body" style="overflow-x: scroll;margin: 20px;padding: 0;">
 
 
-                            <table class="table table-striped" id="orderTable">
+                            <table class="table table-bordered" id="orderTable">
                                 <thead>
                                   <tr>
-                                    <th scope="col">id</th>
+                                    <th scope="col"> id</th>
                                     {{-- <th scope="col">orderid</th> --}}
                                     <th scope="col">customer_name</th>
                                     <th scope="col">phone_number</th>
@@ -172,11 +179,6 @@
         $(function() {
 
 
-
-
-
-
-
             var table = $('#orderTable').DataTable({
                             "dom": 'T<"clear">lfrtip'
                             , "bAutoWidth": true
@@ -206,7 +208,7 @@
                                 {
                                         data: null
                                         , render: function(row) {
-                                            return row.id;
+                                            return row.order_id;
                                         }
                                     },
 
@@ -235,7 +237,10 @@
                                 }, {
                                     data: null
                                     , render: function(row) {
-                                        var html = `<a href="#" class="btn btn-primary">edit</a><a href="#" class="btn btn-danger">delete</a><a href="#" class="btn btn-primary">print</a>`;
+                                        var html = `<a href="#" data-id="${row.order_id}" class="sidebar-link editOrder" data-bs-toggle="modal"><i class="bi bi-pencil"></i> </a>
+                                        <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn "><i class="bi bi-trash"></i>
+                                        </button><button type="button" data-id="${row.order_id}" class=" printOrder sidebar-link btn"><i class="bi bi-printer"></i>
+                                        </button> <a href="{{url('invoice')}}/${row.invoice_id}" type="button" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn" id="print"><i class="bi bi-receipt"></i></i></button>`;
                                         return html;
                                     }
                                 }
@@ -254,38 +259,6 @@
 
                             }
                         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -345,35 +318,51 @@
                             <span id="nameErr"> </span>
                         </div>
                     </div> `;
-
-
-
                 $("#appendHtml").append(html);
-
-
-            });
-
-            $(document).on('click','.remove',function(e) {
-                e.preventDefault();
-              $(this).closest('.rem').remove();
             });
 
 
 
 
+            // add total amount
+            function total_amt(){
+                var a = $('.product_select').last().data('id');
+                var  int_value_last_id = a.replace ( /[^\d.]/g, '' );
+                var total=0;
+                    for (let i = 0; i <= int_value_last_id; i++) {
+                        var new_amount =  $('#amount'+i).val();
+                        total += parseInt(new_amount);
+                    }
+                    return(total);
+            }
+
+        // remove new added field
+        $(document).on('click','.remove',function(e) {
+                        e.preventDefault();
+                    $(this).closest('.rem').remove();
+                    var tot =  total_amt();
+                    $("#total").html(tot);
+                    });
+
+
+
+
+        // getting amount after selecting product
             $(document).on('change','.product_select',function(e) {
                 e.preventDefault();
                 var net_amount = 0 ;
+                var total=0;
                 var id = $(this).val();
                 var a = $(this).data('id');
-                var  str1 = a.replace ( /[^\d.]/g, '' );
-               var quantity = $('#quantity'+str1).val();
+                var  id_int_value = a.replace ( /[^\d.]/g, '' );
+                // alert(str1);
+               var quantity = $('#quantity'+id_int_value).val();
                 if ( quantity ){
 
                 }else{
                     var quantity = 1;
                 }
-                alert(quantity);
+                // alert(quantity);
                 $.ajax({
                         type: "POST",
                         url: "{{ route('getAmount') }}",
@@ -382,7 +371,10 @@
                             console.log('Submission was successful.');
                             console.log(data);
                             net_amount = quantity * data ;
-                            $('#amount'+str1).val(net_amount);
+                            $('#amount'+id_int_value).val(net_amount);
+                        var tot =  total_amt();
+                        $("#total").html(tot);
+                        // alert(tot);
                         },
                         error: function(data) {
                             console.log('An error occurred.');
@@ -396,7 +388,7 @@
 
 
 
-
+// getting new amount after changing quantity
             $(document).on('change','.quantity_select',function(e) {
                 e.preventDefault();
                 var net_amount = 0 ;
@@ -421,6 +413,9 @@
                             console.log(data);
                             net_amount = quantity * data ;
                             $('#amount'+id_int_value).val(net_amount);
+                            var tot =  total_amt();
+                            $("#total").html(tot);
+                            // alert(tot);
                         },
                         error: function(data) {
                             console.log('An error occurred.');
@@ -430,7 +425,71 @@
             });
 
 
-// total
+
+
+
+            $('#orderForm').validate({
+                // Specify validation rules
+                rules: {
+                    customer: "required",
+                    phone: "required",
+                },
+                // Specify validation error messages
+                messages: {
+                    customer: "Please enter Customer Name",
+                    phone: "Please enter Phone Number"
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function(form, event) {
+                    var frm = $('#orderForm');
+                    event.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: new FormData($('#orderForm')[0]),
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            console.log('Submission was successful.');
+                            console.log(data);
+                        },
+                        error: function(data) {
+                            console.log('An error occurred.');
+                            console.log(data);
+                        },
+                    });
+
+                }
+            });
+
+
+
+
+
+
+
+
+// getting amount after selecting product
+            $(document).on('click','.deleteOrder',function(e) {
+                e.preventDefault();
+               var id =  $(this).data('id');
+                $.ajax({
+                        type: "POST",
+                        url: "{{ route('deleteOrder') }}",
+                        data: {id : id },
+                        success: function(data) {
+                            console.log('Submission was successful.');
+                            console.log(data);
+                        },
+                        error: function(data) {
+                            console.log('An error occurred.');
+                            console.log(data);
+                        },
+                    });
+
+            });
+
 
 
 
@@ -438,10 +497,4 @@
         });
 
     </script>
-
-
-
-
-
-
 @endpush

@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.css') }}">
 
+
     <!-- Include Choices CSS -->
     <link rel="stylesheet" href="{{ asset('public/assets/vendors/choices.js/choices.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('public/assets/vendors/sweetalert2/sweetalert2.min.css  ') }}">
@@ -24,12 +25,13 @@
     <link rel="shortcut icon" href="{{ asset('public/assets/images/favicon.svg') }}" type="image/x-icon">
 
 
+    {{-- <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js></script> --}}
+
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
 
 
 
@@ -86,7 +88,7 @@
 
                         <li class="sidebar-item  ">
                             <a href="{{ route('product') }}" class='sidebar-link'>
-                                <i class="bi bi-bicycle"></i>
+                                <i class="bi bi-box-seam"></i>
                                 <span>Product</span>
                             </a>
                         </li>
@@ -94,38 +96,17 @@
 
                         <li class="sidebar-item  ">
                             <a href="{{ route('order') }}" class='sidebar-link'>
-                                <i class="bi bi-bicycle"></i>
+                                <i class="bi bi-box-seam"></i>
                                 <span>Order</span>
                             </a>
                         </li>
-
-
-
-                        {{-- <li class="sidebar-item  ">
-                            <a href="" class='sidebar-link'>
-                                <i class="bi bi-bicycle"></i>
-                                <span>Orders</span>
-                            </a>
-                        </li> --}}
-
-                        {{-- <li class="sidebar-item  ">
-                            <a href="{{ route('route') }}" class='sidebar-link'>
-                                <i class="bi bi-bicycle"></i>
-                                <span>Routes</span>
-                            </a>
-                        </li> --}}
-
-
-
-
-
 
 
                         <li class="sidebar-title"> Controls</li>
 
                         <li class="sidebar-item  ">
                             <a href="{{ route('logout') }}" class='sidebar-link'>
-                                <i class="bi bi-bicycle"></i>
+                                <i class="bi bi-box-arrow-right"></i>
                                 <span>logout</span>
                             </a>
                         </li>
@@ -135,7 +116,9 @@
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
-        <div id="main">
+
+
+        <div id="main" style="background-color: #e3e3e3;">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
@@ -176,6 +159,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
         integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script> --}}
+
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
 
     <script src="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js ') }}">
     </script>
@@ -199,6 +187,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
     </script>
 
     @stack('JS')

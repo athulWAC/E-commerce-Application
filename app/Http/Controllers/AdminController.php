@@ -216,8 +216,9 @@ class AdminController extends Controller
             'customer' => 'required',
             'phone' => 'required',
         ]);
-        $invoices = AdminRepos::orderInsert($request);
-        return view('invoice', compact('invoices'));
+
+        AdminRepos::orderInsert($request);
+        return 0;
     }
 
     /**

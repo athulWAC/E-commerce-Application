@@ -31,7 +31,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <tr>
                                         {{-- @foreach ($invoices as $invoice) --}}
                                         <td scope="row">{{ $invoice->order_id }}</td>
@@ -48,7 +47,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 @endsection

@@ -113,35 +113,78 @@
     <script type="text/javascript">
         $(function() {
 
-            var frm = $('#updateproductForm');
+            // var frm = $('#updateproductForm');
+            // frm.submit(function(e) {
+            //     e.preventDefault();
+            //     $.ajax({
+            //         type: frm.attr('method'),
+            //         url: frm.attr('action'),
+            //         data: new FormData($('#updateproductForm')[0]),
+            //         contentType: false,
+            //         processData: false,
+            //         success: function(data) {
+            //             console.log('Submission was successful.');
+            //             console.log(data);
+            //         },
+            //         error: function(data) {
+            //             console.log('An error occurred.');
+            //             console.log(data);
+            //         },
+            //     });
+            // });
 
-            frm.submit(function(e) {
 
-                e.preventDefault();
-                alert('hi');
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: new FormData($('#updateproductForm')[0]),
-                    contentType: false,
-                    processData: false,
-                    success: function(data) {
-                        console.log('Submission was successful.');
-                        console.log(data);
+            $('#updateproductForm').validate({
+                // Specify validation rules
+                rules: {
+                    // The key name on the left side is the name attribute
+                    // of an input field. Validation rules are defined
+                    // on the right side
+                    name: "required",
+                    prod_image: "required",
+                    category_id: "required",
+                    price: {
+                        required: true,
+                        minlength: 1
+                    }
+                },
+                // Specify validation error messages
+                messages: {
+                    name: "Please enter your name",
+                    prod_image: "Please enter your prod_image",
+                    category_id: "Please enter your category_id",
+                    price: {
+                        required: "Please provide an amount",
+                        minlength: "Your amount must be at least 1 characters long"
                     },
-                    error: function(data) {
-                        console.log('An error occurred.');
-                        console.log(data);
-                    },
-                });
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function(form, event) {
+                    var frm = $('#updateproductForm');
+                    event.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: new FormData($('#updateproductForm')[0]),
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            console.log('Submission was successful.');
+                            console.log(data);
+                            // swal("successful !", "product is successfully updates",
+                            //     "success");
+                        },
+                        error: function(data) {
+                            console.log('An error occurred.');
+                            console.log(data);
+                            swal("error!", "something went wrong", "error");
+                        },
+                    });
+                }
             });
         });
 
     </script>
-
-
-
-
-
 
 @endpush

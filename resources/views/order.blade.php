@@ -122,7 +122,7 @@
                         <div class="card-body" style="overflow-x: scroll;margin: 20px;padding: 0;">
 
 
-                            <table class="table table-bordered" id="orderTable">
+                            <table class="table table-bordered text-center" id="orderTable">
                                 <thead>
                                   <tr>
                                     <th scope="col"> id</th>
@@ -147,24 +147,6 @@
             </div>
         </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -238,9 +220,9 @@
                                     data: null
                                     , render: function(row) {
                                         var html = `<a href="#" data-id="${row.order_id}" class="sidebar-link editOrder" data-bs-toggle="modal"><i class="bi bi-pencil"></i> </a>
-                                        <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn "><i class="bi bi-trash"></i>
-                                        </button><button type="button" data-id="${row.order_id}" class=" printOrder sidebar-link btn"><i class="bi bi-printer"></i>
-                                        </button> <a href="{{url('invoice')}}/${row.invoice_id}" type="button" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn" id="print"><i class="bi bi-receipt"></i></i></button>`;
+                                        <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn col-1 "><i class="bi bi-trash"></i>
+                                        </button><button type="button" data-id="${row.order_id}" class=" printOrder sidebar-link btn col-1"><i class="bi bi-printer"></i>
+                                        </button> <a href="{{url('invoice')}}/${row.invoice_id}" type="button" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn col-1" id="print"><i class="bi bi-receipt"></i></i></button>`;
                                         return html;
                                     }
                                 }
@@ -268,8 +250,21 @@
             var new_index =  1;
             var x = 0;
             $('#add').on('click', function(e) {
-                e.preventDefault();
 
+
+
+                // var a = $('.product_select').last().data('id');
+                var a = $('.product_select').data('id');
+                var  count = a.replace ( /[^\d.]/g, '' );
+               var temp = 0;
+                while(temp>count){
+                  x =  temp++;
+                }
+                // alert(x);
+
+
+
+                e.preventDefault();
                 x++;
                 var html =
                     // @formatter:off
@@ -300,7 +295,7 @@
                             <div class="col-3 mb-1">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"> Amount*</span>
-                                                <input type="number" class="form-control amount " disabled placeholder="Amount" name="amount[]"
+                                                <input type="number" class="form-control amount " value="0" disabled placeholder="Amount" name="amount[]"
                                                     id="amount` +
                     x +
                     `" value="" aria-label="amount"
@@ -326,13 +321,25 @@
 
             // add total amount
             function total_amt(){
-                var a = $('.product_select').last().data('id');
-                var  int_value_last_id = a.replace ( /[^\d.]/g, '' );
+                // var a = $('.product_select').last().data('id');
+                // var  int_value_last_id = a.replace ( /[^\d.]/g, '' );
+                // var count =  $('.amount').length;
+                //var count =  count(a);
+                //alert(count);
+                // for (let i = 0; i < count; i++) {
+                //     var new_amount =  $('#amount'+i).val();
+                //     alert(new_amount);
+                //     total += parseInt(new_amount);
+                // }
+
+
+
                 var total=0;
-                    for (let i = 0; i <= int_value_last_id; i++) {
-                        var new_amount =  $('#amount'+i).val();
-                        total += parseInt(new_amount);
-                    }
+                var  new_amount = 0;
+                $( ".amount" ).each(function( i ) {
+                    var new_amount =  $(this).val();
+                    total += parseInt(new_amount);
+                });
                     return(total);
             }
 
@@ -362,7 +369,7 @@
                 }else{
                     var quantity = 1;
                 }
-                // alert(quantity);
+
                 $.ajax({
                         type: "POST",
                         url: "{{ route('getAmount') }}",
@@ -389,7 +396,7 @@
 
 
 // getting new amount after changing quantity
-            $(document).on('change','.quantity_select',function(e) {
+            $(document).on('keyup change','.quantity_select',function(e) {
                 e.preventDefault();
                 var net_amount = 0 ;
                 var new_quantity = $(this).val();
@@ -415,7 +422,7 @@
                             $('#amount'+id_int_value).val(net_amount);
                             var tot =  total_amt();
                             $("#total").html(tot);
-                            // alert(tot);
+
                         },
                         error: function(data) {
                             console.log('An error occurred.');
@@ -453,21 +460,17 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
+                            swal("successful !", "Order successfully added", "success");
                         },
                         error: function(data) {
                             console.log('An error occurred.');
                             console.log(data);
+                            swal("error!", "Something went wrong", "error");
                         },
                     });
 
                 }
             });
-
-
-
-
-
-
 
 
 // getting amount after selecting product
@@ -481,10 +484,13 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
+                            swal("successful !", "Order is deleted", "success");
                         },
                         error: function(data) {
                             console.log('An error occurred.');
                             console.log(data);
+                            swal("error!", "Something went wrong", "error");
+
                         },
                     });
 
@@ -498,3 +504,4 @@
 
     </script>
 @endpush
+

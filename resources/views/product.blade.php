@@ -147,10 +147,13 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
+                            swal("successful !", "Product added successfully", "success");
                         },
                         error: function(data) {
                             console.log('An error occurred.');
                             console.log(data);
+                            swal("error!", "something went wrong", "error");
+
                         },
                     });
 
@@ -174,10 +177,12 @@
                     success: function(data) {
                         console.log('Submission was successful.');
                         console.log(data);
+                        swal("successful !", "Product deleted successfully", "success");
                     },
                     error: function(data) {
                         console.log('An error occurred.');
                         console.log(data);
+                        swal("error!", "something went wrong", "error");
                     },
                 });
             });

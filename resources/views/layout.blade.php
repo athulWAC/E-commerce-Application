@@ -172,6 +172,7 @@
     <script src="{{ asset('public/assets/js/pages/form-element-select.js ') }}">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    {{-- <script src="sweetalert2.all.min.js"></script> --}}
     <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js ') }}">
     </script>
     <script src="{{ asset('public/assets/js/mazer.js') }}"></script>
@@ -191,8 +192,6 @@
     </script>
 
     @stack('JS')
-
-
 
 </body>
 

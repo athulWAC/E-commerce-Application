@@ -101,6 +101,13 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('rayzorpay') }}" class='sidebar-link'>
+                                <i class="bi bi-box-seam"></i>
+                                <span>rayzorpay</span>
+                            </a>
+                        </li>
+
 
                         <li class="sidebar-title"> Controls</li>
 

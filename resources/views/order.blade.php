@@ -95,6 +95,14 @@
 
                                 <div class="text-end"> Total : <span id="total">0000</span> </div>
                                 <input class="form-control col-1 btn btn-primary" type="submit" name="submit" id="submit" value="submit">
+
+                                {{-- <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="{{ env('RAZORPAY_KEY') }}" data-amount="100"
+                                data-buttontext="Pay 1 INR" data-name="check rayzorpay"
+                                data-description="Rozerpay" data-image=" halo" data-prefill.name="name"
+                                data-prefill.email="email" data-theme.color="#808000">
+                                </script> --}}
+
                                 {{-- <button class="form-control col-2" >submit</button> --}}
                             </form>
                         </div>
@@ -156,6 +164,7 @@
 
 @push('JS')
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <script type="text/javascript">
         $(function() {
@@ -321,19 +330,6 @@
 
             // add total amount
             function total_amt(){
-                // var a = $('.product_select').last().data('id');
-                // var  int_value_last_id = a.replace ( /[^\d.]/g, '' );
-                // var count =  $('.amount').length;
-                //var count =  count(a);
-                //alert(count);
-                // for (let i = 0; i < count; i++) {
-                //     var new_amount =  $('#amount'+i).val();
-                //     alert(new_amount);
-                //     total += parseInt(new_amount);
-                // }
-
-
-
                 var total=0;
                 var  new_amount = 0;
                 $( ".amount" ).each(function( i ) {
@@ -495,10 +491,6 @@
                     });
 
             });
-
-
-
-
 
         });
 

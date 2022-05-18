@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ForgotpasswordController;
+use App\Http\Controllers\RazorpayPaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,7 +65,8 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
 });
 
 
-
+Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('rayzorpay');
+Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
 
 // Route::post('login', [AdminController::class, 'login'])->name('admin.login');

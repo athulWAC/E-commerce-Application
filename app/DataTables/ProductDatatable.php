@@ -38,14 +38,9 @@ class ProductDatatable extends DataTable
 
         $dataTable->editColumn('action', function (Product $product) {
             $id  = $product->id;
-            // editProduct
-            // $base_url = env('APP_URL');
             return '<a href="' . route('editProduct', ['id' => $id]) . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
-
             <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn  "><i class="bi bi-trash"></i></button>';
         });
-
-
 
         $dataTable->rawColumns(['category', 'action']);
         return $dataTable;
@@ -62,7 +57,7 @@ class ProductDatatable extends DataTable
         // $id = $this->id;
         return $model->newQuery();
 
-        // ->select('products.id as id', 'products.name as productname', 'price', 'categories.name as categoryname')
+        // ->select('products.id as product_id', 'products.name as product_name', 'price', 'categories.name')
         // ->leftJoin('categories', 'categories.id', '=', 'products.category_id');
     }
 
@@ -87,6 +82,7 @@ class ProductDatatable extends DataTable
             ]);
     }
 
+
     /**
      * Get columns.
      * Listing of datatable columns from controller
@@ -107,7 +103,6 @@ class ProductDatatable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-
         ];
     }
 

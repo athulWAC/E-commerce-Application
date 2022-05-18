@@ -4,7 +4,7 @@
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             {{-- <div class="col-md-6 col-12"> --}}
-            <div class="col-10">
+            <div class="col-11">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Product</h4>
@@ -71,24 +71,7 @@
 
                                     </div>
                                 </form>
-                                <div class="row fluid">
-                                    <div class="col " style="margin-top: 4%;">
-                                        <div class="card">
-                                            <div class="card-header">
-                                            </div>
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div style="overflow-x: scroll;margin: 20px;padding: 0;">
-                                                        {!! $dtable = $dataTable->table() !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -96,6 +79,32 @@
 
         </div>
     </section>
+
+
+    <section id="basic-horizontal-layouts">
+        <div class="row match-height">
+            <div class="col-11" style="margin-top: 4%;">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Product list</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div style="overflow-x: scroll;margin: 20px;padding: 0;">
+                                {!! $dtable = $dataTable->table() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
 @endsection
 
 @push('JS')

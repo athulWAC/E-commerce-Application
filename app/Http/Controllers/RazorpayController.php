@@ -16,6 +16,14 @@ use Redirect;
 class RazorpayController extends Controller
 {
 
+
+    public function index()
+    {
+        $products = Product::get();
+        return view('razorpayorder', compact('products'));
+    }
+
+
     public function payWithRazorpay()
     {
         return view('payWithRazorpay');
@@ -104,6 +112,10 @@ class RazorpayController extends Controller
         dd('hi');
         // return  $data;
     }
+
+
+
+
 
 
     public function payment(Request $request)

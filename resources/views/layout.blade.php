@@ -109,7 +109,7 @@
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="{{ route('paywithrazorpay') }}" class='sidebar-link'>
+                            <a href="{{ route('razorpayOrder') }}" class='sidebar-link'>
                                 <i class="bi bi-box-seam"></i>
                                 <span>rayzorpay 2.0</span>
                             </a>

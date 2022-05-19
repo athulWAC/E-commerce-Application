@@ -57,16 +57,19 @@
                             {{-- @dd($response); --}}
                             <div class="card-body text-center">
                                 <div class="form-group mt-1 mb-1">
-                                    {{-- <input type="text" name="key" id="key" value="{{ env('RAZORPAY_KEY') }}"
-                                        class="form-control" placeholder="Enter Amount"> --}}
+
                                     <input type="hidden" name="key" id="key" value="{{ $response['razorpayId'] }}"
                                         class="form-control" placeholder="Enter Amount">
                                     <input type="hidden" name="orderid" id="orderid"
                                         value="{{ $response['orderId'] }}" class="form-control"
                                         placeholder="Enter Amount">
 
-                                    {{-- <input type="text" name="amount" id="amount" class="form-control amount"
+                                    {{-- <input type="hidden" name="key" id="key" value="" class="form-control"
+                                        placeholder="Enter Amount">
+                                    <input type="hidden" name="orderid" id="orderid" value="" class="form-control"
                                         placeholder="Enter Amount"> --}}
+
+
                                 </div>
                                 <button id="rzp-button1" class="btn btn-success btn-lg">Pay</button>
                             </div>

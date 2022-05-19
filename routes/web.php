@@ -65,10 +65,12 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
     Route::get('invoice/{id}', [AdminController::class, 'invoice'])->name('invoice');
 });
 
-
+// payment with script
 Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('rayzorpay');
 Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
-// payment now
+
+// payment with order
+Route::get('razoerpay-order', [RazorpayController::class, 'index'])->name('razorpayOrder');
 Route::get('paywithrazorpay', [RazorpayController::class, 'payWithRazorpay'])->name('paywithrazorpay');
 Route::post('payment', [RazorpayController::class, 'payment'])->name('payment');
 Route::post('confirm', [RazorpayController::class, 'confirm'])->name('confirm');

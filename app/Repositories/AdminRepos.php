@@ -81,7 +81,7 @@ class AdminRepos
 
         // $order->order_id = $orderid;
         $order = new Order();
-        $order->id = $orderid;
+        // $order->id = $orderid;
         $order->customer_name = $request->customer;
         $order->phone = $request->phone;
         $order->save();

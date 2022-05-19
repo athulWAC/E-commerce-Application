@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal " method="post" action="{{ route('addOrder') }}"
+                            <form class="form form-horizontal " method="post" action="{{ route('confirm') }}"
                                 id="orderForm" name="orderForm">
                                 @csrf
                                 <div class="form-body">
@@ -39,10 +39,6 @@
                                         </div>
 
                                     </div><br>
-
-
-
-
 
                                     <div class="row rem">
 
@@ -96,14 +92,6 @@
                                 <div class="text-end"> Total : <span id="total">0000</span> </div>
                                 <input class="form-control col-1 btn btn-primary" type="submit" name="submit" id="submit" value="submit">
 
-                                {{-- <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                data-key="{{ env('RAZORPAY_KEY') }}" data-amount="100"
-                                data-buttontext="Pay 1 INR" data-name="check rayzorpay"
-                                data-description="Rozerpay" data-image=" halo" data-prefill.name="name"
-                                data-prefill.email="email" data-theme.color="#808000">
-                                </script> --}}
-
-                                {{-- <button class="form-control col-2" >submit</button> --}}
                             </form>
                         </div>
                     </div>
@@ -293,7 +281,7 @@
                         <div class="col-3 mb-1">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> Quantity*</span>
-                                <input type="number" class="form-control quantity_select" placeholder="Quantity" name="quantity[]" id="quantity` +
+                                <input type="number" class="form-control quantity_select" value="1" placeholder="Quantity" name="quantity[]" id="quantity` +
                     x +
                     `" value="" aria-label="quantity" aria-describedby="basic-addon1">
                                 </div>
@@ -365,7 +353,6 @@
                 }else{
                     var quantity = 1;
                 }
-alert(quantity);
 
                 $.ajax({
                         type: "POST",
@@ -376,7 +363,6 @@ alert(quantity);
                             console.log(data);
                             net_amount = quantity * data ;
                             $('#amount'+id_int_value).val(net_amount);
-                            $('#quantity'+id_int_value).val(quantity);
                         var tot =  total_amt();
                         $("#total").html(tot);
                         // alert(tot);
@@ -449,27 +435,27 @@ alert(quantity);
 
                 // order form ajax request commented for payment gateway integration
 
-                submitHandler: function(form, event) {
-                    var frm = $('#orderForm');
-                    event.preventDefault();
-                    $.ajax({
-                        type: frm.attr('method'),
-                        url: frm.attr('action'),
-                        data: new FormData($('#orderForm')[0]),
-                        contentType: false,
-                        processData: false,
-                        success: function(data) {
-                            console.log('Submission was successful.');
-                            console.log(data);
-                            swal("successful !", "Order successfully added", "success");
-                        },
-                        error: function(data) {
-                            console.log('An error occurred.');
-                            console.log(data);
-                            swal("error!", "Something went wrong", "error");
-                        },
-                    });
-                }
+                // submitHandler: function(form, event) {
+                //     var frm = $('#orderForm');
+                //     event.preventDefault();
+                //     $.ajax({
+                //         type: frm.attr('method'),
+                //         url: frm.attr('action'),
+                //         data: new FormData($('#orderForm')[0]),
+                //         contentType: false,
+                //         processData: false,
+                //         success: function(data) {
+                //             console.log('Submission was successful.');
+                //             console.log(data);
+                //             swal("successful !", "Order successfully added", "success");
+                //         },
+                //         error: function(data) {
+                //             console.log('An error occurred.');
+                //             console.log(data);
+                //             swal("error!", "Something went wrong", "error");
+                //         },
+                //     });
+                // }
 
             });
 

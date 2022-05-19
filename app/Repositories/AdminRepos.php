@@ -69,11 +69,6 @@ class AdminRepos
 
     public static function orderInsert($request)
     {
-        // $order = Order::with('orderDetails')->get();
-        // dd($order);
-        // $net_amount = $order->orderDetails->productdetails->price;
-        // dd($net_amount);
-        // dd($request);
         $id = Order::count();
         if ($id == 0) {
             $orderid = 1;

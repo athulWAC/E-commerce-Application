@@ -293,7 +293,7 @@
                         <div class="col-3 mb-1">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> Quantity*</span>
-                                <input type="number" class="form-control quantity_select" placeholder="Quantity" name="quantity[]" id="quantity` +
+                                <input type="number" class="form-control quantity_select" value="1" placeholder="Quantity" name="quantity[]" id="quantity` +
                     x +
                     `" value="" aria-label="quantity" aria-describedby="basic-addon1">
                                 </div>
@@ -444,6 +444,9 @@
                 },
                 // Make sure the form is submitted to the destination defined
                 // in the "action" attribute of the form when valid
+
+                // order form ajax request commented for payment gateway integration
+
                 submitHandler: function(form, event) {
                     var frm = $('#orderForm');
                     event.preventDefault();
@@ -464,8 +467,8 @@
                             swal("error!", "Something went wrong", "error");
                         },
                     });
-
                 }
+
             });
 
 

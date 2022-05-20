@@ -38,13 +38,12 @@ class ForgotpasswordController extends Controller
 
 
 
-
+    // no
     public function forgotPasswordRequest(Request $request)
     {
         $email = $request->email;
         $randomId  =   rand(2, 50);
         Mail::to($email)->send(new ForgotPasswordEmailMail($email));
-        dd($request);
     }
 
 
@@ -81,12 +80,6 @@ class ForgotpasswordController extends Controller
 
         return back()->with('message', 'We have e-mailed your password reset link!');
     }
-
-
-
-
-
-
 
 
     /**

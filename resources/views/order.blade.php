@@ -40,12 +40,7 @@
 
                                     </div><br>
 
-
-
-
-
                                     <div class="row rem">
-
 
                                         <div class="col-4 mb-1">
                                             <div class="input-group mb-3">
@@ -79,7 +74,6 @@
                                             <span id="nameErr"> </span>
                                         </div>
 
-
                                         <div class="col-2 mb-1">
                                             <div class="input-group mb-3">
                                                 <a href="" id="add" name="add" class="btn add ">+</a>
@@ -87,7 +81,6 @@
                                             <span id="nameErr"> </span>
                                         </div>
                                     </div>
-
 
                                     <div id="appendHtml"></div>
 
@@ -113,10 +106,6 @@
         </div>
     </section>
 
-
-
-
-
 {{-- hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh --}}
 
     <section id="basic-horizontal-layouts">
@@ -127,7 +116,9 @@
                         <h4 class="card-title">Orders list</h4>
                     </div>
                     <div class="card-content">
+                        {{-- <input type="text" value="2012-05-15 21:05" id="datetimepicker"> --}}
                         <div class="card-body" style="overflow-x: scroll;margin: 20px;padding: 0;">
+                            {{-- <div id="orderTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" id="js-search-input" placeholder="" aria-controls="orderTable"></label></div> --}}
 
 
                             <table class="table table-bordered text-center" id="orderTable">
@@ -164,14 +155,17 @@
 
 @push('JS')
 
+
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <script type="text/javascript">
         $(function() {
 
+            $('#datetimepicker').datetimepicker();
 
             var table = $('#orderTable').DataTable({
-                            "dom": 'T<"clear">lfrtip'
+                            "dom": 'lfrtip'
                             , "bAutoWidth": true
                             , "processing": true
                             , "serverSide": true
@@ -180,9 +174,8 @@
                                 [10, 15, 25, 35, 50, 100, -1]
                                 , [10, 15, 25, 35, 50, 100, "All"]
                             ]
-                            , searching: false
+                            , searching: true
                             , "bLengthChange": false
-
                             , bInfo: false
                             , "ajax": {
                                 "url": "{{ route('orderDatatable') }}"
@@ -190,7 +183,8 @@
                                 , "type": "GET"
                                 , "data": function(d) {
                                     d._token = "{{csrf_token()}}";
-                                    d.search = $('#js-search-input').val();
+                                    // d.search = $('#js-search-input').val();
+                                    d.search = $("input[type=search]").val()
                                     d.status = $('#requests-status').val();
                                 }
                             }
@@ -223,7 +217,13 @@
                                 }, {
                                     data: null
                                     , render: function(row) {
-                                        return row.created_at;
+                                        var  date = new Date(row.created_at);
+
+                                        var dd = date.getDate();
+                                        var mm = date.getMonth() + 1;
+                                        var yyyy = date.getFullYear();
+                                        date = dd+'/'+mm+'/'+yyyy;
+                                        return date;
                                     }
                                 }, {
                                     data: null
@@ -365,7 +365,7 @@
                 }else{
                     var quantity = 1;
                 }
-alert(quantity);
+// alert(quantity);
 
                 $.ajax({
                         type: "POST",
@@ -500,5 +500,21 @@ alert(quantity);
         });
 
     </script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+    useCurrent: false //Important! See issue #1075
+    });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+ </script>
+
 @endpush
 

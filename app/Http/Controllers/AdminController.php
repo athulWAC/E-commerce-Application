@@ -147,6 +147,7 @@ class AdminController extends Controller
 
     public function orderDatatable(Request $request)
     {
+        // dd($request);
         $draw = $request->get('draw');
         $search = $request->get('search');
         $statusfilter = $request->get('status');
@@ -154,23 +155,35 @@ class AdminController extends Controller
         $sortColumn = $request->order[0]['column'] ?? 3;
         $sortDir = ($request->order[0]['dir'] ?? 'desc') == 'desc' ? 'DESC' : 'ASC';
 
-        $invoice = Order::select([
+        // $invoice = new order;
+        $order = Order::select([
             'invoices.id as invoice_id',
             'invoices.total',
             'invoices.created_at',
             'orders.customer_name',
             'orders.phone',
             'orders.id as order_id'
-            // 'products.name as product_name'
 
-        ])
-            ->leftJoin('invoices', 'invoices.order_id', '=', 'orders.id',)->get();
-        // $invoice = Invoice::select('total')->get();
-        // dd($invoice);
+        ]);
+
+        $invoice =  $order->leftJoin('invoices', 'invoices.order_id', '=', 'orders.id');
         $total_request =    $invoice->count();
-        // dd($total_request);
+
+
+        if (!empty($search)) {
+            $order->where(function ($qry) use ($search) {
+                $qry->orWhere('invoices.id', 'like', "%$search%");
+                $qry->orWhere('invoices.total', 'like', "%$search%");
+                $qry->orWhere('orders.customer_name', 'like', "%$search%");
+                $qry->orWhere('orders.phone', 'like', "%$search%");
+                $qry->orWhere('orders.id', 'like', "%$search%");
+            });
+        }
+        $invoice = $order->get();
+
 
         $filteredCount = $invoice->count();
+
         $data = array(
             'draw' => $draw,
             'recordsTotal' => $total_request,

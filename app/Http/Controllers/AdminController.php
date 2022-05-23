@@ -100,8 +100,9 @@ class AdminController extends Controller
     public function product(ProductDatatable $dataTable)
     {
         $products = Product::with('category')->get();
+
+        // dd($products);
         $categories = Category::get();
-        // dd($category);
         return $dataTable->render('product', compact('products', 'categories'));
     }
 

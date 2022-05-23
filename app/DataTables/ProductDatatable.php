@@ -73,13 +73,21 @@ class ProductDatatable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-            ->parameters([
-                'dom' => 'lBrtip',
-                'ordering' => false,
-                'buttons' => ['csv', 'excel'],
-                'pageLength' => 10
-                // , 'excel', 'pdf', 'print', 'reset', 'reload'
-            ]);
+            // ->dom('<"datatable-btn-wrapper"B><"row"<"col"l><"col"f>>r<"table-responsive"t>ip')
+            // ->parameters([
+            //     'dom' => 'lBrtip',
+            //     'ordering' => false,
+            //     'buttons' => ['csv', 'excel'],
+            //     'pageLength' => 10
+            // ]);
+
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            );
     }
 
 

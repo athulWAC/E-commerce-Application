@@ -176,11 +176,10 @@
                                             });
                                         }
                                         setTimeout(function () {
-                                            return document
-                                                .querySelector(
-                                                    ".sidebar-item.active"
-                                                )
-                                                .scrollIntoView(!1);
+                                            return document.querySelector(
+                                                ".sidebar-item.active"
+                                            );
+                                            // .scrollIntoView(!1);
                                         }, 100),
                                             this.onFirstLoad();
                                     },

@@ -113,26 +113,6 @@
     <script type="text/javascript">
         $(function() {
 
-            // var frm = $('#updateproductForm');
-            // frm.submit(function(e) {
-            //     e.preventDefault();
-            //     $.ajax({
-            //         type: frm.attr('method'),
-            //         url: frm.attr('action'),
-            //         data: new FormData($('#updateproductForm')[0]),
-            //         contentType: false,
-            //         processData: false,
-            //         success: function(data) {
-            //             console.log('Submission was successful.');
-            //             console.log(data);
-            //         },
-            //         error: function(data) {
-            //             console.log('An error occurred.');
-            //             console.log(data);
-            //         },
-            //     });
-            // });
-
 
             $('#updateproductForm').validate({
                 // Specify validation rules
@@ -172,13 +152,13 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
-                            // swal("successful !", "product is successfully updates",
-                            //     "success");
+                            top.location.href = window.product;
                         },
                         error: function(data) {
                             console.log('An error occurred.');
                             console.log(data);
                             swal("error!", "something went wrong", "error");
+
                         },
                     });
                 }

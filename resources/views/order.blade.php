@@ -136,7 +136,6 @@
                                 </thead>
                                 <tbody>
 
-
                                 </tbody>
                             </table>
 
@@ -155,8 +154,6 @@
 
     <script type="text/javascript">
         $(function() {
-
-            // $('#datetimepicker').datetimepicker();
 
             var table = $('#orderTable').DataTable({
                             "dom": 'lfrtip'
@@ -343,7 +340,6 @@
 
 
 
-
         // getting amount after selecting product
             $(document).on('change','.product_select',function(e) {
                 e.preventDefault();
@@ -382,8 +378,6 @@
                     });
 
             });
-
-
 
 
 
@@ -488,7 +482,6 @@
 
                         },
                     });
-
             });
 
         });
@@ -496,18 +489,7 @@
     </script>
 
 <script type="text/javascript">
-    // $(function () {
-    //     $('#datetimepicker6').datetimepicker();
-    //     $('#datetimepicker7').datetimepicker({
-    // useCurrent: false //Important! See issue #1075
-    // });
-    //     $("#datetimepicker6").on("dp.change", function (e) {
-    //         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-    //     });
-    //     $("#datetimepicker7").on("dp.change", function (e) {
-    //         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-    //     });
-    // });
+
  </script>
 
 @endpush

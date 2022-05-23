@@ -130,13 +130,14 @@ class AdminController extends Controller
         $products  =  Product::where('id', $id)->first();
         $categories  =  Category::get();
         return view('editProduct', compact('products', 'categories'));
+        // return;
     }
 
 
     public function updateProduct(Request $request)
     {
         AdminRepos::ProductUpdate($request);
-        return redirect()->route('product');
+        return;
     }
 
     public function deleteProduct(Request $request)

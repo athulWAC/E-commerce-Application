@@ -26,15 +26,9 @@ class ProductDatatable extends DataTable
         $dataTable = datatables()
             ->eloquent($query);
 
-
-        // $dataTable->addColumn('total', function (Cart $cart) {
-        //     $total = $cart->quantity * $cart->product->amount;
-        //     return $total . ' Rs';
+        // $dataTable->editColumn('category_name', function (Product $product) {
+        //     return $product->category_name;
         // });
-
-        $dataTable->editColumn('category', function (Product $product) {
-            return $product->category->name;
-        });
 
         $dataTable->editColumn('action', function (Product $product) {
             $id  = $product->id;
@@ -42,7 +36,7 @@ class ProductDatatable extends DataTable
             <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn  "><i class="bi bi-trash"></i></button>';
         });
 
-        $dataTable->rawColumns(['category', 'action']);
+        $dataTable->rawColumns(['action']);
         return $dataTable;
     }
 
@@ -54,11 +48,8 @@ class ProductDatatable extends DataTable
      */
     public function query(Product $model)
     {
-        // $id = $this->id;
-        return $model->newQuery();
-
-        // ->select('products.id as product_id', 'products.name as product_name', 'price', 'categories.name')
-        // ->leftJoin('categories', 'categories.id', '=', 'products.category_id');
+        return $model->newQuery()->leftJoin('categories', 'categories.id', '=', 'products.category_id')
+            ->select('products.id as id', 'products.name as product_name', 'products.price as price', 'categories.name as category_name');
     }
 
     /**
@@ -73,21 +64,18 @@ class ProductDatatable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-            // ->dom('<"datatable-btn-wrapper"B><"row"<"col"l><"col"f>>r<"table-responsive"t>ip')
-            // ->parameters([
-            //     'dom' => 'lBrtip',
-            //     'ordering' => false,
-            //     'buttons' => ['csv', 'excel'],
-            //     'pageLength' => 10
-            // ]);
 
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload'),
-            );
+            ->parameters([
+                'dom' => 'Bfrtip',
+                'ordering' => false,
+                // 'pageLength' => 10,
+                'buttons' => [
+                    'export',
+                    'print',
+                    'reset',
+                    'reload',
+                ],
+            ]);
     }
 
 
@@ -102,10 +90,10 @@ class ProductDatatable extends DataTable
     {
         return [
 
-            Column::make('id')->orderable(false),
-            Column::make('name')->orderable(false),
-            Column::make('category')->orderable(false)->sWidth('200px'),
-            Column::make('price')->orderable(false)->sWidth('200px'),
+            Column::make('id')->orderable(true),
+            Column::make('product_name')->name('products.name')->title('Product')->orderable(false),
+            Column::make('category_name')->name('categories.name')->title('Category')->orderable(false)->width('200px'),
+            Column::make('price')->orderable(false)->width('200px'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

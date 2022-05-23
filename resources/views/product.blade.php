@@ -110,12 +110,12 @@
 @push('JS')
     {!! $dataTable->scripts() !!}
 
+
     <script type="text/javascript">
+        // var oTable = $('#product-table').DataTable();
+
+
         $(function() {
-
-
-
-
 
             $('#productForm').validate({
                 // Specify validation rules
@@ -171,7 +171,6 @@
 
 
 
-
             $(document).on('click', '.deleteProduct', function(e) {
                 e.preventDefault();
                 // alert('del');
@@ -187,6 +186,8 @@
                         console.log('Submission was successful.');
                         console.log(data);
                         swal("successful !", "Product deleted successfully", "success");
+                        // product-table
+                        oTable.draw();
                     },
                     error: function(data) {
                         console.log('An error occurred.');

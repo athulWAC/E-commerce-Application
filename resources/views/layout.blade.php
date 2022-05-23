@@ -11,10 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.css') }}">
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" /> --}}
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> --}}
-
-
     <!-- Include Choices CSS -->
     <link rel="stylesheet" href="{{ asset('public/assets/vendors/choices.js/choices.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('public/assets/vendors/sweetalert2/sweetalert2.min.css  ') }}">
@@ -23,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css ') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/vendors/bootstrap-icons/bootstrap-icons.css ') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/app.css  ') }}">
-    {{-- <link rel="shortcut icon" href="{{ asset('public/assets/images/favicon.svg') }}" type="image/x-icon"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
 
     <link href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -31,14 +27,16 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
 
-    <link rel="stylesheet" {{-- href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/6-beta7/css/tempus-dominus.css"> --}} <style>
-    table.dataTable td {
-    padding: 15px 8px;
-    }
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/6-beta7/css/tempus-dominus.css"> --}}
 
-    .fontawesome-icons .the-icon svg {
-    font-size: 24px;
-    }
+    <style>
+        table.dataTable td {
+            padding: 15px 8px;
+        }
+
+        .fontawesome-icons .the-icon svg {
+            font-size: 24px;
+        }
 
     </style>
 
@@ -73,11 +71,6 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
-
-
-
-
-
                         <li class="sidebar-title"> basic controls</li>
 
                         <li class="sidebar-item  ">
@@ -117,13 +110,11 @@
                                 <span>logout</span>
                             </a>
                         </li>
-
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
         </div>
-
 
         <div id="main" style="background-color: #e3e3e3;">
             <header class="mb-3">
@@ -136,7 +127,6 @@
             @yield('content')
 
 
-
             <footer>
                 {{-- foote here --}}
             </footer>
@@ -147,31 +137,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js ') }}">
     </script>
-    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
         integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-
-
-
-
     <script src="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js ') }}">
     </script>
-    <!-- Include Choices JavaScript -->
     <script src="{{ asset('public/assets/js/pages/form-element-select.js ') }}">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-
     <script src="{{ asset('public/assets/js/mazer.js') }}"></script>
-
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-    {{-- <script src="{{ asset('public/vendor/datatables/buttons.server-side.js') }}"></script> --}}
+    <script src="{{ asset('public/vendor/datatables/buttons.server-side.js') }}"></script>
+
+
+    <script type="text/javascript">
+        window.order = "{{ route('order') }}";
+        window.product = "{{ route('product') }}";
+
+    </script>
+
 
 
 

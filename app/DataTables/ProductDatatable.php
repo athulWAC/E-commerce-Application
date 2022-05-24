@@ -64,16 +64,15 @@ class ProductDatatable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-
             ->parameters([
                 'dom' => 'Bfrtip',
                 'ordering' => false,
-                // 'pageLength' => 10,
                 'buttons' => [
                     'export',
                     'print',
                     'reset',
                     'reload',
+                    'alert',
                 ],
             ]);
     }

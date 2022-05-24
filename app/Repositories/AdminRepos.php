@@ -34,7 +34,6 @@ class AdminRepos
     {
         $id = $request->product_id;
 
-
         if ($request->file('image')) {
             $file = $request->file('image');
             $newfilename = time() . '_' . $file->getClientOriginalName();
@@ -44,7 +43,7 @@ class AdminRepos
             $image['image']  = " ";
         }
 
-        // dd($product);
+
         Product::where('id', $id)->update([
 
             'name' => $request->name,
@@ -69,6 +68,7 @@ class AdminRepos
 
     public static function orderInsert($request)
     {
+        // dd($request);
         $id = Order::count();
         if ($id == 0) {
             $orderid = 1;
@@ -78,29 +78,30 @@ class AdminRepos
         }
 
         $count = count($request->product);
+        // dd($count);
 
-        // $order->order_id = $orderid;
         $order = new Order();
-        // $order->id = $orderid;
         $order->customer_name = $request->customer;
         $order->phone = $request->phone;
         $order->save();
 
-
         $total_amount = 0;
         for ($i = 0; $i < $count; $i++) {
-            $orderdetails = new OrderDetails();
-            $orderdetails->order_id = $orderid;
-            $orderdetails->product_id = $request->product[$i];
 
-            $orderdetails->quantity = $request->quantity[$i];
-            $orderdetails->save();
-            // dd($orderdetails);
-            $product =  Product::FindOrFail($request->product[$i]);
-            $product_price = $product->price * $request->quantity[$i];
-            $total_amount += $product_price;
+            if ($request->product[$i] == null) {
+                $i = $i++;
+            } else {
+                $orderdetails = new OrderDetails();
+                $orderdetails->order_id = $orderid;
+                $orderdetails->product_id = $request->product[$i];
+                $orderdetails->quantity = $request->quantity[$i];
+                $orderdetails->save();
+                $product =  Product::FindOrFail($request->product[$i]);
+                $product_price = $product->price * $request->quantity[$i];
+                $total_amount += $product_price;
+            }
         }
-        // dd($total_amount);
+
 
         $invoice = new Invoice();
         $invoice->order_id =  $orderid;
@@ -108,7 +109,6 @@ class AdminRepos
         $invoice->save();
 
         $order_date = order::latest()->value('created_at');
-
 
         $data['total_amount'] = $total_amount;
         $data['orderid'] = $orderid;

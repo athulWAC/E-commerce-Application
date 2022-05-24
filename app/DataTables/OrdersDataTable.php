@@ -65,15 +65,17 @@ class OrdersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
+
+            Column::make('id'),
+            Column::make('customer_name'),
+            Column::make('phone_number'),
+            Column::make('net_amount'),
+            Column::make('order_date'),
+            Column::computed('actions')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

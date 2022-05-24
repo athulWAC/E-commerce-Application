@@ -36,7 +36,7 @@
                                         <div class="col-md-4">
                                             <label>Category</label>
                                         </div>
-                                        <div class="col-md-8 form-group input-group">
+                                        <div class="col-md-8 form-group ">
                                             <label class="input-group-text" for="state">Category* </label>
                                             <select class="form-select" id="category_id" name="category_id">
                                                 <option value="">Select a Category</option>
@@ -112,9 +112,6 @@
 
 
     <script type="text/javascript">
-        // var oTable = $('#product-table').DataTable();
-
-
         $(function() {
 
             $('#productForm').validate({
@@ -157,6 +154,8 @@
                             console.log('Submission was successful.');
                             console.log(data);
                             swal("successful !", "Product added successfully", "success");
+                            var Otable = $('#product-table').DataTable();
+                            Otable.draw();
                         },
                         error: function(data) {
                             console.log('An error occurred.');
@@ -175,7 +174,7 @@
                 e.preventDefault();
                 // alert('del');
                 var id = $(this).data('id');
-                alert(id);
+                // alert(id);
                 $.ajax({
                     type: "POST",
                     url: "{{ route('deleteProduct') }}",
@@ -187,7 +186,8 @@
                         console.log(data);
                         swal("successful !", "Product deleted successfully", "success");
                         // product-table
-                        oTable.draw();
+                        var Otable = $('#product-table').DataTable();
+                        Otable.draw();
                     },
                     error: function(data) {
                         console.log('An error occurred.');

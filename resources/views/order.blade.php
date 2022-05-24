@@ -57,7 +57,7 @@
                                         <div class="col-3 mb-1">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"> Quantity*</span>
-                                                <input type="number" class="form-control quantity_select" placeholder="Quantity"
+                                                <input type="number" class="form-control quantity_select" min="1" placeholder="Quantity"
                                                     name="quantity[]" id="quantity0" value="" aria-label="quantity"
                                                     aria-describedby="basic-addon1">
                                             </div>
@@ -284,7 +284,7 @@
                         <div class="col-3 mb-1">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> Quantity*</span>
-                                <input type="number" class="form-control quantity_select" placeholder="Quantity" name="quantity[]" id="quantity` +
+                                <input type="number" class="form-control quantity_select" min="1" placeholder="Quantity" name="quantity[]" id="quantity` +
                     x +
                     `" value="" aria-label="quantity" aria-describedby="basic-addon1">
                                 </div>
@@ -424,13 +424,19 @@
             $('#orderForm').validate({
                 // Specify validation rules
                 rules: {
-                    customer: "required",
-                    phone: "required",
+                    "customer": "required",
+                    "phone": "required",
+                    // "quantity[]" : {
+                    //     required: true,
+                    //     min : 1
+                    // }
+
                 },
                 // Specify validation error messages
                 messages: {
-                    customer: "Please enter Customer Name",
-                    phone: "Please enter Phone Number"
+                    "customer" : "Please enter Customer Name",
+                    "phone" : "Please enter Phone Number",
+
                 },
                 // Make sure the form is submitted to the destination defined
                 // in the "action" attribute of the form when valid
@@ -460,6 +466,19 @@
                 }
 
             });
+
+
+            $('[name="quantity[]"]').each(function(){
+                    $(this).rules("add", {
+                    required: true,
+                    min:1,
+                    messages: {
+                        required: "quantity is required"
+                    }
+                    });
+            });
+
+
 
 
 // getting amount after selecting product

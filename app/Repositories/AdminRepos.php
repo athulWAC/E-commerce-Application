@@ -72,9 +72,6 @@ class AdminRepos
         $id = Order::count();
         if ($id == 0) {
             $orderid = 1;
-        } else {
-            $latest = order::latest()->value('id');
-            $orderid =   $latest + 1;
         }
 
         $count = count($request->product);
@@ -85,11 +82,13 @@ class AdminRepos
         $order->phone = $request->phone;
         $order->save();
 
+        $orderid = order::latest()->value('id');
+
         $total_amount = 0;
         for ($i = 0; $i < $count; $i++) {
 
             if ($request->product[$i] == null) {
-                $i = $i++;
+                $i = $i + 1;
             } else {
                 $orderdetails = new OrderDetails();
                 $orderdetails->order_id = $orderid;

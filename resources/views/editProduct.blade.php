@@ -40,7 +40,7 @@
                                         <div class="col-md-4">
                                             <label>Category</label>
                                         </div>
-                                        <div class="col-md-8 form-group input-group">
+                                        <div class="col-md-8 form-group">
                                             <label class="input-group-text" for="state">Category* </label>
                                             <select class="form-select" id="category_id" name="category_id">
                                                 <option value="">Select a Category</option>

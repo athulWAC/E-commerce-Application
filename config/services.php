@@ -29,5 +29,18 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'client_id' => '512547327069-803fga5dalfs14s1lqbg7rdlm0eu609v.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost/invoice-system/callback/google',
+    ],
+    'github' => [
+        'client_id' => 'f0df2bf552f8cbb63412',
+        'client_secret' => '90800d8810ccb1fc4944938c08054524fe536ff8',
+        'redirect' => 'http://localhost/invoice-system/callback/github',
+    ],
+
+
+
 
 ];

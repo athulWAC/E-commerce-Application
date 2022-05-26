@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ForgotpasswordController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\RazorpayPaymentController;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,7 @@ Route::get('reset-password/{token}', [ForgotpasswordController::class, 'showRese
 Route::post('reset-password', [ForgotpasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
-Route::post('loginVal', [AdminController::class, 'loginVal'])->name('loginVal');
+Route::post('loginVal', [AdminController::class, 'loginVal'])->name('loginVal')->middleware("throttle:10,2");;
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
 
 
@@ -75,3 +76,8 @@ Route::get('paywithrazorpay', [RazorpayController::class, 'payWithRazorpay'])->n
 Route::post('payment', [RazorpayController::class, 'payment'])->name('payment');
 Route::post('confirm', [RazorpayController::class, 'confirm'])->name('confirm');
 // Route::post('login', [AdminController::class, 'login'])->name('admin.login');
+
+
+// socialite
+Route::get('/auth/redirect/{provider}', [GoogleLoginController::class, 'redirect'])->name('google.redirect');
+Route::get('callback/{provider}', [GoogleLoginController::class, 'callback'])->name('google.callback');

@@ -27,8 +27,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/6-beta7/css/tempus-dominus.css"> --}}
-
     <style>
         table.dataTable td {
             padding: 15px 8px;

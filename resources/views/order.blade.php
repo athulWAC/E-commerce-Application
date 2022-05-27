@@ -219,13 +219,16 @@
                                 }, {
                                     data: null
                                     , render: function(row) {
-                                        var html = `<a href="#" data-id="${row.order_id}" class="sidebar-link editOrder" data-bs-toggle="modal"><i class="bi bi-pencil"></i> </a>
+                                        var html = `
+
                                         <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn col-1 "><i class="bi bi-trash"></i>
-                                        </button><button type="button" data-id="${row.order_id}" class=" printOrder sidebar-link btn col-1"><i class="bi bi-printer"></i>
                                         </button> <a href="{{url('invoice')}}/${row.invoice_id}" type="button" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn col-1" id="print"><i class="bi bi-receipt"></i></i></button>`;
                                         return html;
                                     }
                                 }
+                                 // <a href="#" data-id="${row.order_id}" class="sidebar-link editOrder" data-bs-toggle="modal"><i class="bi bi-pencil"></i> </a>
+                                // </button><button type="button" data-id="${row.order_id}" class=" printOrder sidebar-link btn col-1"><i class="bi bi-printer"></i>
+
 
                             ]
                             , 'columnDefs': [{

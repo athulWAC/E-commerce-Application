@@ -86,16 +86,19 @@
                     </form>
                     <hr>
                     <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <a href="{{ url('/auth/redirect/google') }}"><i class="bi bi-google"></i>-login</a>
+                        <div class="col d-flex justify-content-center">
+                            <span><a href="{{ url('/auth/redirect/github') }}"><i
+                                        class="bi bi-github"></i></a></span>&nbsp;&nbsp;
+                            <span> <a href="{{ url('/auth/redirect/google') }}"><i
+                                        class="bi bi-google"></i></a></span>
+
                         </div>
                     </div>
 
-                    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <a href="{{ url('/auth/redirect/github') }}"><i class="bi "></i>github</a>
-                        </div>
-                    </div>
+
+
+
+
                 </div>
             </div>
             <div class="col-lg-6 d-none d-lg-block">

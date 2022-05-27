@@ -50,13 +50,13 @@
                                             <label>Size</label>
                                         </div>
                                         <div class="col-md-8 form-group ">
-                                            {{-- <label class="input-group-text" for="state">Size* </label> --}}
-                                            <select class="form-select" id="size" name="size">
+
+                                            <input type="hidden" name="size" id="size" value="1">
+                                            {{-- <select class="form-select" id="size" name="size">
                                                 <option value="">Select a size</option>
-                                                {{-- @foreach ($categories as $category) --}}
                                                 <option value="1">SM</option>
-                                                {{-- @endforeach --}}
-                                            </select>
+                                            </select> --}}
+
                                         </div>
                                         {{-- <button id="bt">tt</button> --}}
                                         <div class="col-md-4">

@@ -21,16 +21,22 @@ class GoogleLoginController extends Controller
     {
 
         $getInfo = FacadesSocialite::driver($provider)->user();
-
-
         $name = $getInfo->name;
         $email = $getInfo->email;
         $provider_id = $getInfo->id;
-        // github uses nickname
         if ($name == null) {
             $name = $getInfo->nickname;
         }
-        $user = $this->createUser($provider, $name, $email, $provider_id);
+
+        $user = User::with('socialite')
+            ->whereHas('socialite', function ($query) use ($provider_id) {
+                $query->where('provider_id', $provider_id);
+            })->first();
+
+        if ($user == null) {
+            $user = $this->createUser($provider, $name, $email, $provider_id);
+        }
+
         auth()->login($user);
         return redirect()->to('product');
     }
@@ -45,12 +51,10 @@ class GoogleLoginController extends Controller
             $user = User::create([
                 'name'     => $name,
                 'email'    => $email,
-                'provider' => $provider,
+                // 'provider' => $provider,
 
             ]);
-
             $user_id = $user->id;
-
             $socialite = ModelsSocialite::create([
                 'user_id' => $user_id,
                 'name'     => $name,
@@ -58,26 +62,13 @@ class GoogleLoginController extends Controller
                 'provider_id' => $provider_id
             ]);
         } else {
-
             $socialite = ModelsSocialite::create([
-                'user_id' =>  $user->id,
+                'user_id' => $user->id,
                 'name'     => $name,
                 'provider' => $provider,
                 'provider_id' => $provider_id
             ]);
         }
-
-        // $user = User::where('provider_id', $provider_id)->first();
-
-        // if (!$user) {
-        //     $user = User::create([
-        //         'name'     => $name,
-        //         'email'    => $email,
-        //         'provider' => $provider,
-        //         'provider_id' => $provider_id
-        //     ]);
-        // }
-
 
         return $user;
     }

@@ -7,10 +7,13 @@ use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\ProductEmailNotification;
 use App\Repositories\AdminRepos;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -116,8 +119,22 @@ class AdminController extends Controller
 
         ]);
 
-        AdminRepos::ProductInsert($request);
+        $product = AdminRepos::ProductInsert($request);
 
+
+
+
+        $user = User::first();
+        $message = [
+            'greeting' => 'Hi ' . $user->name . ',',
+            'body' => 'you have added a new product',
+            'thanks' => 'Thank you for adding a product',
+            'actionText' => ' add product',
+            'actionURL' => url('http://localhost/invoice-system/product'),
+            'id' => 57,
+            'product' => $product,
+        ];
+        Notification::send($user, new ProductEmailNotification($message));
         return redirect()->back();
     }
 
@@ -220,7 +237,25 @@ class AdminController extends Controller
     public function order()
     {
         $products = Product::get();
+
+        $product_id = 3;
+        $order = Order::with('orderDetails')
+            ->whereHas('orderDetails', function ($query) use ($product_id) {
+                $query->where('product_id', $product_id);
+            })->get();
+
+        dd($order);
+
         return view('order', compact('products'));
+
+
+
+
+
+        $user = User::with('socialite')
+            ->whereHas('socialite', function ($query) use ($provider_id) {
+                $query->where('provider_id', $provider_id);
+            })->first();
     }
 
 

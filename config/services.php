@@ -40,7 +40,10 @@ return [
         'redirect' => 'http://localhost/invoice-system/callback/github',
     ],
 
+    'nexmo' => [
+        'sms_from' => env('NEXMO_KEY'),
 
+    ],
 
 
 ];

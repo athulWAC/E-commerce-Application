@@ -26,7 +26,7 @@ class AdminRepos
             $data['image']  = " ";
         }
 
-        Product::create($data);
+        return  Product::create($data);
     }
 
 

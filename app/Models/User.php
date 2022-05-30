@@ -49,4 +49,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Socialite::class, 'user_id');
     }
+
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone_number;
+    }
 }

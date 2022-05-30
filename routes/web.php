@@ -5,6 +5,7 @@ use App\Http\Controllers\ForgotpasswordController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\RazorpayPaymentController;
+use App\Http\Controllers\SmsMsgController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,3 +82,8 @@ Route::post('confirm', [RazorpayController::class, 'confirm'])->name('confirm');
 // socialite
 Route::get('/auth/redirect/{provider}', [GoogleLoginController::class, 'redirect'])->name('google.redirect');
 Route::get('callback/{provider}', [GoogleLoginController::class, 'callback'])->name('google.callback');
+
+
+Route::get('send-sms-notification', [SmsMsgController::class, 'sendSmsToMobile'])->name('vonage');
+// Route::get('send-sms-notification1', [SmsMsgController::class, 'sendSmsToMobile1'])->name('sms1');
+Route::get('send-sms-notification1', [SmsMsgController::class, 'sendMessage'])->name('twilio');

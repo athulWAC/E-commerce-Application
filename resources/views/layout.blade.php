@@ -100,6 +100,21 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('vonage') }}" class='sidebar-link'>
+                                <i class="bi bi-box-seam"></i>
+                                <span>send sms with vonage</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('twilio') }}" class='sidebar-link'>
+                                <i class="bi bi-box-seam"></i>
+                                <span>send sms with twilio</span>
+                            </a>
+                        </li>
+
+
                         <li class="sidebar-title"> Controls</li>
 
                         <li class="sidebar-item  ">

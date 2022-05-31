@@ -213,6 +213,17 @@ class AdminController extends Controller
     }
 
 
+
+    public function editOrder(Request $request)
+    {
+        dd($request);
+        $data =  AdminRepos::orderDelete($request);
+        return response()->json($data);
+    }
+
+
+
+
     public function deleteOrder(Request $request)
     {
         $data =  AdminRepos::orderDelete($request);
@@ -244,18 +255,9 @@ class AdminController extends Controller
                 $query->where('product_id', $product_id);
             })->get();
 
-        dd($order);
+        // dd($order);
 
         return view('order', compact('products'));
-
-
-
-
-
-        $user = User::with('socialite')
-            ->whereHas('socialite', function ($query) use ($provider_id) {
-                $query->where('provider_id', $provider_id);
-            })->first();
     }
 
 

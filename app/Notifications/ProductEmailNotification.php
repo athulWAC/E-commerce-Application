@@ -31,7 +31,10 @@ class ProductEmailNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['database'];
+        //    uncomment to send mail
+        // return ['mail', 'database'];
+
     }
 
     /**

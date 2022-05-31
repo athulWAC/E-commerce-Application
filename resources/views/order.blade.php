@@ -12,7 +12,7 @@
                         <h4 class="card-title">Add Order</h4>
                     </div>
                     <div class="card-content">
-                        <div class="card-body">
+                        <div class="card-body" >
                             <form class="form form-horizontal " method="post" action="{{ route('addOrder') }}"
                                 id="orderForm" name="orderForm">
                                 @csrf
@@ -20,7 +20,7 @@
 
                                     <div class="row">
 
-                                        <div class="col-3 mb-1">
+                                        <div class="col-3 mb-1" >
                                             {{-- <div class="input-group mb-3"> --}}
                                                 {{-- <label class="input-group-text" for="state">Customer* </label> --}}
                                                     <input type="text" class="form-control" placeholder="Customer"
@@ -40,10 +40,10 @@
 
                                     </div><br>
 
-                                    <div class="row rem">
+                                    <div class="row rem" >
 
-                                        <div class="col-4 mb-1">
-                                            <div class="input-group mb-3">
+                                        <div class="col-4 mb-1" style="width: 250px">
+                                            <div class="input-group mb-3" >
                                                 <label class="input-group-text" for="state">Product* </label>
                                                 <select class="form-select product_select" id="product0" data-id="amount0" name="product[]" >
                                                     <option value=" ">Select a Product</option>
@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-3 mb-1">
+                                        <div class="col-3 mb-1" style="width: 250px">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"> Quantity*</span>
                                                 <input type="number" class="form-control quantity_select" min="1" placeholder="Quantity"
@@ -64,7 +64,7 @@
                                             <span id="nameErr"> </span>
                                         </div>
 
-                                        <div class="col-3 mb-1">
+                                        <div class="col-3 mb-1" style="width: 250px">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"> Amount*</span>
                                                 <input type="number" class="form-control amount " placeholder="Amount" name="amount[]"
@@ -87,16 +87,7 @@
                                 </div>
 
                                 <div class="text-end"> Total : <span id="total">0000</span> </div>
-                                <input class="form-control col-1 btn btn-primary" type="submit" name="submit" id="submit" value="submit">
-
-                                {{-- <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                data-key="{{ env('RAZORPAY_KEY') }}" data-amount="100"
-                                data-buttontext="Pay 1 INR" data-name="check rayzorpay"
-                                data-description="Rozerpay" data-image=" halo" data-prefill.name="name"
-                                data-prefill.email="email" data-theme.color="#808000">
-                                </script> --}}
-
-                                {{-- <button class="form-control col-2" >submit</button> --}}
+                                <input class="form-control btn btn-primary" style="width: 100px" type="submit" name="submit" id="submit" value="submit">
                             </form>
                         </div>
                     </div>
@@ -221,8 +212,11 @@
                                     , render: function(row) {
                                         var html = `
 
-                                        <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn col-1 "><i class="bi bi-trash"></i>
-                                        </button> <a href="{{url('invoice')}}/${row.invoice_id}" type="button" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn col-1" id="print"><i class="bi bi-receipt"></i></i></button>`;
+                                        <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn col-1 " title="delete"><i class="bi bi-trash"></i>
+                                        </button>
+                                        <a href="{{url('invoice')}}/${row.invoice_id}" type="button" title="invoice" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn col-1" id="print"><i class="bi bi-receipt"></i></i></button>
+
+                                            `;
                                         return html;
                                     }
                                 }
@@ -272,7 +266,7 @@
                 var html =
                     // @formatter:off
                     `<div class="row rem">
-                                <div class="col-4 mb-1">
+                                <div class="col-4 mb-1" style="width: 250px">
                                     <div class="input-group mb-3">
                                     <label class="input-group-text" for="state">Product* </label>
                                     <select class="form-select product_select" id="product` + x +`" data-id="amount` + x +`" name="product[]">
@@ -284,7 +278,7 @@
                             </div>
                         </div>
 
-                        <div class="col-3 mb-1">
+                        <div class="col-3 mb-1" style="width: 250px">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> Quantity*</span>
                                 <input type="number" class="form-control quantity_select" min="1" placeholder="Quantity" name="quantity[]" id="quantity` +
@@ -295,7 +289,7 @@
                             </div>
 
 
-                            <div class="col-3 mb-1">
+                            <div class="col-3 mb-1" style="width: 250px">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1"> Amount*</span>
                                                 <input type="number" class="form-control amount " value="0" disabled placeholder="Amount" name="amount[]"
@@ -309,7 +303,7 @@
 
 
 
-                        <div class="col-2 mb-1">
+                        <div class="col-2 mb-1" style="width: 250px">
                             <div class="input-group mb-3">
                                 <a href="" id="remove_`+x+`" class="remove"  name="remove"> - </a>
                             </div>

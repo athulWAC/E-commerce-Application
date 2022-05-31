@@ -32,11 +32,28 @@ class ProductDatatable extends DataTable
 
         $dataTable->editColumn('action', function (Product $product) {
             $id  = $product->id;
-            return '<a href="' . route('editProduct', ['id' => $id]) . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
-            <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn  "><i class="bi bi-trash"></i></button>';
+
+            return '<a href="' . route('editProduct', ['id' => $id]) . '" title="edit" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
+            <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn " title="delete" ><i class="bi bi-trash"></i></button>';
+        });
+        $dataTable->addColumn('image', function (Product $product) {
+            $id  = $product->id;
+            $image  = $product->image;
+            $url = "storage\app\assets\products";
+            // dd($url);
+            return '<div class="avatar avatar-lg me-3">
+
+            <a href="' . route('editProduct', ['id' => $id]) . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  >  <img src="storage\app\assets\products\\' . $image . '" alt="" srcset=""> </a>
+
+
+
+        </div>';
         });
 
-        $dataTable->rawColumns(['action']);
+
+
+
+        $dataTable->rawColumns(['action', 'image']);
         return $dataTable;
     }
 
@@ -49,7 +66,7 @@ class ProductDatatable extends DataTable
     public function query(Product $model)
     {
         return $model->newQuery()->leftJoin('categories', 'categories.id', '=', 'products.category_id')
-            ->select('products.id as id', 'products.name as product_name', 'products.price as price', 'categories.name as category_name');
+            ->select('products.id as id', 'products.image as image', 'products.name as product_name', 'products.price as price', 'categories.name as category_name');
     }
 
     /**
@@ -89,10 +106,11 @@ class ProductDatatable extends DataTable
     {
         return [
 
+            Column::make('image'),
             Column::make('id')->orderable(true),
             Column::make('product_name')->name('products.name')->title('Product')->orderable(false),
-            Column::make('category_name')->name('categories.name')->title('Category')->orderable(false)->width('200px'),
-            Column::make('price')->orderable(false)->width('200px'),
+            Column::make('category_name')->name('categories.name')->title('Category')->orderable(false),
+            Column::make('price')->orderable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

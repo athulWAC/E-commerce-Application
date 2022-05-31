@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class AdminRepos
 {
@@ -20,7 +21,7 @@ class AdminRepos
         if ($request->file('image')) {
             $file = $request->file('image');
             $newfilename = time() . '_' . $file->getClientOriginalName();
-            $floc = $file->storeAs('files', $newfilename);
+            Storage::putFileAs('/assets/products/', $request->file('image'), $newfilename);
             $data['image']  =   $newfilename;
         } else {
             $data['image']  = " ";
@@ -37,7 +38,11 @@ class AdminRepos
         if ($request->file('image')) {
             $file = $request->file('image');
             $newfilename = time() . '_' . $file->getClientOriginalName();
-            $floc = $file->storeAs('files', $newfilename);
+            Storage::putFileAs('/assets/products/', $request->file('image'), $newfilename);
+
+            // $floc = $file->storeAs('files', $newfilename);
+            // Storage::putFileAs('/assets/products/', $request->file('image'));
+
             $image['image']  =   $newfilename;
         } else {
             $image['image']  = " ";

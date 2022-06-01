@@ -6,18 +6,19 @@
 
     // my custom button
 
-    DataTable.ext.buttons.alert = {
-        className: "buttons-alert",
+    DataTable.ext.buttons.delete = {
+        className: "buttons-delete",
+        // id: "deleteProducts",
 
         text: function (dt) {
             return (
-                ' <i class="fa fa-download" id="alert"></i>' +
-                dt.i18n("buttons.alert", "Alert")
+                ' <i class="fa fa-trash"></i>' +
+                dt.i18n("buttons.delete", "Delete")
             );
         },
 
         action: function (e, dt, button, config) {
-            dt.draw(false);
+            // dt.draw(false);
         },
     };
 })(jQuery, jQuery.fn.dataTable);

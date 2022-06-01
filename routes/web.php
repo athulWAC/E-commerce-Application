@@ -56,7 +56,6 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
     Route::post('product/update', [AdminController::class, 'updateProduct'])->name('updateProduct');
     Route::post('product/delete', [AdminController::class, 'deleteProduct'])->name('deleteProduct');
 
-
     // orders
     Route::get('order', [AdminController::class, 'order'])->name('order');
     Route::post('getamount', [AdminController::class, 'getAmount'])->name('getAmount');

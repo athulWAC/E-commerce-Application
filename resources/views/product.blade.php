@@ -187,12 +187,13 @@
                 e.preventDefault();
                 // alert('del');
                 var id = $(this).data('id');
+                var arr = $.makeArray(id);
                 // alert(id);
                 $.ajax({
                     type: "POST",
                     url: "{{ route('deleteProduct') }}",
                     data: {
-                        id: id
+                        id: arr
                     },
                     success: function(data) {
                         console.log('Submission was successful.');
@@ -208,6 +209,59 @@
                         swal("error!", "something went wrong", "error");
                     },
                 });
+            });
+
+
+
+
+            $(document).on('click', '.dt_parent_select', function() {
+                // var parent_checked = $('.dt_parent_select').attr('checked', true);
+
+                if ($('.dt_parent_select').prop('checked')) {
+                    $('.dt_child_select').prop('checked', true);
+                    // alert('hey');
+                } else {
+                    $('.dt_child_select').prop('checked', false);
+                    // alert('hi');
+                }
+            });
+
+            $(document).on('click', '.buttons-delete', function() {
+
+
+                var check_id = $(".dt_child_select:checked").map(function() {
+                    return $(this).data('id');
+                }).get();
+
+                if (check_id.length === 0) {
+                    swal("No Selections!", "Select anything to delete ", "error");
+
+                } else {
+                    console.log(check_id);
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('deleteProduct') }}",
+                        data: {
+                            id: check_id
+                        },
+                        success: function(data) {
+                            console.log('Submission was successful.');
+                            console.log(data);
+                            swal("successful !", "Product deleted successfully",
+                                "success");
+                            // product-table
+                            var Otable = $('#product-table').DataTable();
+                            Otable.draw();
+                        },
+                        error: function(data) {
+                            console.log('An error occurred.');
+                            console.log(data);
+                            swal("error!", "something went wrong", "error");
+                        },
+                    });
+
+                }
+
             });
 
         });

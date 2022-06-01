@@ -122,6 +122,7 @@
                                     <th scope="col">net_amount</th>
                                     <th scope="col">order_date</th>
                                     <th scope="col">actions</th>
+                                    <th scope="col">status</th>
 
                                   </tr>
                                 </thead>
@@ -207,7 +208,7 @@
                                         date = dd+'/'+mm+'/'+yyyy;
                                         return date;
                                     }
-                                }, {
+                                },{
                                     data: null
                                     , render: function(row) {
                                         var html = `
@@ -215,8 +216,18 @@
                                         <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn col-1 " title="delete"><i class="bi bi-trash"></i>
                                         </button>
                                         <a href="{{url('invoice')}}/${row.invoice_id}" type="button" title="invoice" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn col-1" id="print"><i class="bi bi-receipt"></i></i></button>
-
                                             `;
+                                        return html;
+                                    }
+                                },{
+                                    data: null
+                                    , render: function(row) {
+                                        var checked = null;
+                                        var check = row.order_status;
+                                        if (check ==1) {
+                                            var checked = "checked"
+                                        }
+                                        var html = '<input type="checkbox" data-toggle="toggle" '+checked+' >';
                                         return html;
                                     }
                                 }

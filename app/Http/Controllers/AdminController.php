@@ -181,7 +181,8 @@ class AdminController extends Controller
             'invoices.created_at',
             'orders.customer_name',
             'orders.phone',
-            'orders.id as order_id'
+            'orders.id as order_id',
+            'orders.status as order_status'
 
         ]);
 

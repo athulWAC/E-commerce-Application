@@ -63,9 +63,13 @@ class AdminRepos
 
     public static function Productdelete($request)
     {
-        $id = $request->id;
-        // dd($id);
-        Product::where('id', $id)->delete();
+
+        foreach ($request->id as $id) {
+            // $id = $request->id;
+            Product::where('id', $id)->delete();
+        }
+
+
         return;
     }
 
@@ -85,6 +89,7 @@ class AdminRepos
         $order = new Order();
         $order->customer_name = $request->customer;
         $order->phone = $request->phone;
+        $order->status = 1;
         $order->save();
 
         $orderid = order::latest()->value('id');

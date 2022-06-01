@@ -30,32 +30,35 @@ class ProductDatatable extends DataTable
         //     return $product->category_name;
         // });
 
+        $dataTable->addColumn('select', function (Product $product) {
+            $id  = $product->id;
+            return '<input type="checkbox" class="dt_child_select" data-id="' . $id . '" data-toggle="toggle">';
+        });
+
+
         $dataTable->editColumn('action', function (Product $product) {
             $id  = $product->id;
-
             return '<a href="' . route('editProduct', ['id' => $id]) . '" title="edit" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
             <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn " title="delete" ><i class="bi bi-trash"></i></button>';
         });
+
+
         $dataTable->addColumn('image', function (Product $product) {
             $id  = $product->id;
             $image  = $product->image;
             $url = "storage\app\assets\products";
             // dd($url);
             return '<div class="avatar avatar-lg me-3">
-
-            <a href="' . route('editProduct', ['id' => $id]) . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  >  <img src="storage\app\assets\products\\' . $image . '" alt="" srcset=""> </a>
-
-
-
-        </div>';
+            <a href="' . route('editProduct', ['id' => $id]) . '" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  >
+            <img src="storage\app\assets\products\\' . $image . '" alt="" srcset=""> </a>
+            </div>';
         });
 
-
-
-
-        $dataTable->rawColumns(['action', 'image']);
+        $dataTable->rawColumns(['select', 'action', 'image']);
         return $dataTable;
     }
+
+
 
     /** Get query source of dataTable.
      * send data
@@ -88,8 +91,8 @@ class ProductDatatable extends DataTable
                     'export',
                     'print',
                     'reset',
-                    'reload',
-                    'alert',
+                    'delete',
+                    // 'reload',
                 ],
             ]);
     }
@@ -105,7 +108,7 @@ class ProductDatatable extends DataTable
     protected function getColumns()
     {
         return [
-
+            Column::make('select')->title('<input type="checkbox" class="dt_parent_select" data-id="" data-toggle="toggle" >'),
             Column::make('image'),
             Column::make('id')->orderable(true),
             Column::make('product_name')->name('products.name')->title('Product')->orderable(false),

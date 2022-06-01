@@ -334,5 +334,20 @@
             },
         });
     }
+
+    // DataTable.ext.buttons.delete = {
+    //     className: "buttons-delete",
+
+    //     text: function (dt) {
+    //         return (
+    //             ' <i class="fa fa-download" id="deleteProducts"></i>' +
+    //             dt.i18n("buttons.delete", "delete")
+    //         );
+    //     },
+
+    //     action: function (e, dt, button, config) {
+    //         dt.draw(false);
+    //     },
+    // };
 })(jQuery, jQuery.fn.dataTable);
 // console.log(DataTable);

@@ -13,7 +13,7 @@
         text: function (dt) {
             return (
                 ' <i class="fa fa-trash"></i>' +
-                dt.i18n("buttons.delete", "Delete")
+                dt.i18n("buttons.delete", " Delete")
             );
         },
 

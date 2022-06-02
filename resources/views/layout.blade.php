@@ -7,28 +7,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon" href="#">
     <title>Invoice System </title>
+    {{-- <link rel="stylesheet" href="{{ asset('public/assets/vendors/choices.js/choices.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('public/assets/vendors/iconly/bold.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css ') }}"> --}}
+
+
+
+
+
+
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- Include Choices CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.css') }}">
-    <!-- Include Choices CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/vendors/choices.js/choices.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('public/assets/vendors/sweetalert2/sweetalert2.min.css  ') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/vendors/fontawesome/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/vendors/iconly/bold.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css ') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/vendors/bootstrap-icons/bootstrap-icons.css ') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/app.css  ') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/vendors/bootstrap-icons/bootstrap-icons.css ') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.15.1/sweetalert2.min.css">
+
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.css"
         integrity="sha512-EzrsULyNzUc4xnMaqTrB4EpGvudqpetxG/WNjCpG6ZyyAGxeB6OBF9o246+mwx3l/9Cn838iLIcrxpPHTiygAA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <link href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+    {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <style>
@@ -159,6 +169,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js ') }}">
     </script>
@@ -167,12 +179,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.js"
         integrity="sha512-bAjB1exAvX02w2izu+Oy4J96kEr1WOkG6nRRlCtOSQ0XujDtmAstq5ytbeIxZKuT9G+KzBmNq5d23D6bkGo8Kg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
+    {{-- sweet alert --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.15.1/sweetalert2.min.js"></script>
+
     <script src="{{ asset('public/assets/js/mazer.js') }}"></script>
-    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+
+    {{-- datatable --}}
+
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
     <script src="{{ asset('public/vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('public/assets/js/datatable.buttons.js') }}"></script>
+
+    {{-- datetime picker --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <script type="text/javascript">
@@ -180,9 +202,6 @@
         window.product = "{{ route('product') }}";
 
     </script>
-
-
-
 
     <script type="text/javascript">
         jQuery.ajaxSetup({
@@ -193,7 +212,12 @@
 
     </script>
 
+
+
     @stack('JS')
+
+
+
 
 </body>
 

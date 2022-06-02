@@ -26,20 +26,25 @@ class ProductDatatable extends DataTable
         $dataTable = datatables()
             ->eloquent($query);
 
-        // $dataTable->editColumn('category_name', function (Product $product) {
-        //     return $product->category_name;
-        // });
-
         $dataTable->addColumn('select', function (Product $product) {
             $id  = $product->id;
             return '<input type="checkbox" class="dt_child_select" data-id="' . $id . '" data-toggle="toggle">';
         });
 
-
         $dataTable->editColumn('action', function (Product $product) {
             $id  = $product->id;
             return '<a href="' . route('editProduct', ['id' => $id]) . '" title="edit" data-id="{{$product->id}}" class="sidebar-link warning" data-bs-toggle="modal"  ><i class="bi bi-pencil"></i> </a>
             <button type="button" data-id="' . $id . '" class=" deleteProduct sidebar-link btn " title="delete" ><i class="bi bi-trash"></i></button>';
+        });
+
+        $dataTable->editColumn('created_at', function (Product $product) {
+            $date  = $product->created_at;
+            $utc = $date;
+            $time = strtotime($utc); //returns an integer epoch time: 1401339270
+            $dt = date("M/d/Y", $time);
+            // echo $dt->format('Y-m-d H:i:s'); // output = 2017-01-01 00:00:00
+
+            return  $dt;
         });
 
 
@@ -69,8 +74,10 @@ class ProductDatatable extends DataTable
     public function query(Product $model)
     {
         return $model->newQuery()->leftJoin('categories', 'categories.id', '=', 'products.category_id')
-            ->select('products.id as id', 'products.image as image', 'products.name as product_name', 'products.price as price', 'categories.name as category_name');
+            ->select('products.id as id', 'products.created_at as created_at', 'products.image as image', 'products.name as product_name', 'products.price as price', 'categories.name as category_name');
     }
+
+
 
     /**
      * Optional method if you want to use html builder.
@@ -114,6 +121,7 @@ class ProductDatatable extends DataTable
             Column::make('product_name')->name('products.name')->title('Product')->orderable(false),
             Column::make('category_name')->name('categories.name')->title('Category')->orderable(false),
             Column::make('price')->orderable(false),
+            Column::make('created_at')->title('Added_date')->orderable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

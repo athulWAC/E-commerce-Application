@@ -22,7 +22,7 @@ class SmsMsgController extends Controller
             'text' => 'halo athul this is test msg '
         ]);
 
-        dd('SMS has sent.');
+        dd('SMS has sent');
     }
 
 

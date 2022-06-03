@@ -63,7 +63,16 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
     Route::get('orderDatatable', [AdminController::class, 'orderDatatable'])->name('orderDatatable');
     Route::post('delete-order', [AdminController::class, 'deleteOrder'])->name('deleteOrder');
 
+    Route::get('notification', [AdminController::class, 'notification'])->name('notification');
+
     Route::get('invoice/{id}', [AdminController::class, 'invoice'])->name('invoice');
+});
+
+
+
+Route::get('test', function () {
+    event(new App\Events\UserLogin('Someone'));
+    return "Event has been sent!";
 });
 
 // payment with script

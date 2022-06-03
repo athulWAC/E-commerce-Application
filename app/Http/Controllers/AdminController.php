@@ -327,4 +327,11 @@ class AdminController extends Controller
         Auth::logout();
         return view('login');
     }
+
+    // notification
+
+    public function notification()
+    {
+        return view('notification');
+    }
 }

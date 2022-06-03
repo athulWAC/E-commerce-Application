@@ -100,6 +100,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Product list</h4>
+                        <p class="text-end">
+                            <i class="bi bi-gear-fill btn toogle-on" data-toggle="tooltip" data-placement="top"
+                                title="settings" id="tool"></i>
+                        </p>
+
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -125,6 +130,11 @@
 
 
     <script type="text/javascript">
+        $(function() {
+
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
         $(function() {
 
             $('#productForm').validate({

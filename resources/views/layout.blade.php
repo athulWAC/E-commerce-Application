@@ -11,12 +11,6 @@
     {{-- <link rel="stylesheet" href="{{ asset('public/assets/vendors/iconly/bold.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css ') }}"> --}}
 
-
-
-
-
-
-
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- Include Choices CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -36,9 +30,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-        integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.css"
+        integrity="sha512-5UZhIPmPGksf4ihhsCbDbHiplNQXiUQ1o4lQR22KQtqlTUYZN0civrpBL9eJuLgnP2IYBdn5XuVEhe4gz8tt3A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+        href="https://developer.snapappointments.com/bootstrap-select/A.ajax,,_libs,,_highlight.js,,_9.15.6,,_css,,_github.min.css+css,,_base.css+css,,_custom.css+dist,,_css,,_bootstrap-select.min.css,Mcc.Sm_E229yq5.css.pagespeed.cf.6VwF0Af9hv.css"
+        rel="stylesheet">
 
 
     <style>
@@ -68,6 +66,7 @@
                         <div class="logo">
                             <a href="">Admin</a>
                         </div>
+
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
@@ -85,7 +84,8 @@
                         </li>
                         <li class="sidebar-title"> basic controls</li>
 
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item  {{ Request::is('product') ? 'active' : null }} ">
+                            {{-- Request::routeIs('welcome'); --}}
                             <a href="{{ route('product') }}" class='sidebar-link'>
                                 <i class="bi bi-box-seam"></i>
                                 <span>Product</span>
@@ -93,13 +93,12 @@
                         </li>
 
 
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item  {{ Request::is('order') ? 'active' : null }}">
                             <a href="{{ route('order') }}" class='sidebar-link'>
                                 <i class="bi bi-box-seam"></i>
                                 <span>Order</span>
                             </a>
                         </li>
-
                         <li class="sidebar-item  ">
                             <a href="{{ route('rayzorpay') }}" class='sidebar-link'>
                                 <i class="bi bi-box-seam"></i>
@@ -107,7 +106,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item ">
                             <a href="{{ route('razorpayOrder') }}" class='sidebar-link'>
                                 <i class="bi bi-box-seam"></i>
                                 <span>rayzorpay 2.0</span>
@@ -128,6 +127,20 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('notification') }}" class='sidebar-link'>
+                                <i class="bi bi-bell-fill"></i>
+                                <span>notification</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('notification') }}" class='sidebar-link'>
+                                {{-- <i class="bi bi-bell-fill"></i> --}}
+                                <i class="bi bi-gear-fill"></i>
+                                <span>settings</span>
+                            </a>
+                        </li>
 
                         <li class="sidebar-title"> Controls</li>
 
@@ -192,9 +205,12 @@
     <script src="{{ asset('public/assets/js/datatable.buttons.js') }}"></script>
 
     {{-- datetime picker --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
     <script type="text/javascript">
@@ -215,8 +231,6 @@
 
 
     @stack('JS')
-
-
 
 
 </body>

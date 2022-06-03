@@ -13,6 +13,8 @@ class SmsMsgController extends Controller
 {
     public function sendSmsToMobile()
     {
+        dd('currently off');
+
         $basic  = new \Nexmo\Client\Credentials\Basic('6807c46c', '0czdmXRKbMP10vEK');
         $client = new \Nexmo\Client($basic);
 
@@ -31,6 +33,8 @@ class SmsMsgController extends Controller
 
     public function sendMessage()
     {
+        dd('currently off');
+
         $message = "twilio test messsage ";
         $recipients = "+919497412943";
 

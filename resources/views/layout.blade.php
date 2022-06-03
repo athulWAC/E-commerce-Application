@@ -30,9 +30,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.css"
-        integrity="sha512-5UZhIPmPGksf4ihhsCbDbHiplNQXiUQ1o4lQR22KQtqlTUYZN0civrpBL9eJuLgnP2IYBdn5XuVEhe4gz8tt3A=="
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css"
+        integrity="sha512-mQ8Fj7epKOfW0M7CwuuxdPtzpmtIB5rI4rl76MSd3mm5dCYBKjzPk7EU/2buhPMs0KmC6YOPR/MQlQwpkdNcpQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
 
     <link
         href="https://developer.snapappointments.com/bootstrap-select/A.ajax,,_libs,,_highlight.js,,_9.15.6,,_css,,_github.min.css+css,,_base.css+css,,_custom.css+dist,,_css,,_bootstrap-select.min.css,Mcc.Sm_E229yq5.css.pagespeed.cf.6VwF0Af9hv.css"
@@ -205,7 +208,9 @@
     <script src="{{ asset('public/assets/js/datatable.buttons.js') }}"></script>
 
     {{-- datetime picker --}}
-
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js">
+    </script>
 
     <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>

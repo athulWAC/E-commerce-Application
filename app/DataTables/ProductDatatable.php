@@ -28,7 +28,7 @@ class ProductDatatable extends DataTable
 
         $dataTable->addColumn('select', function (Product $product) {
             $id  = $product->id;
-            return '<input type="checkbox" class="dt_child_select" data-id="' . $id . '" data-toggle="toggle">';
+            return '<input type="checkbox" class="dt_child_select toggle" data-id="' . $id . '" data-toggle="toggle">';
         });
 
         $dataTable->editColumn('action', function (Product $product) {

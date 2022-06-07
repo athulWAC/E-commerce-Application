@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('login');
-// });
-
 
 Route::prefix('/')->middleware('LogoutMiddleware')->group(function () {
     Route::get('/', [AdminController::class, 'login'])->name('login');
@@ -85,6 +81,11 @@ Route::get('paywithrazorpay', [RazorpayController::class, 'payWithRazorpay'])->n
 Route::post('payment', [RazorpayController::class, 'payment'])->name('payment');
 Route::post('confirm', [RazorpayController::class, 'confirm'])->name('confirm');
 // Route::post('login', [AdminController::class, 'login'])->name('admin.login');
+
+// paypal
+// Route::get('handle-payment', [AdminController::class, 'handlePayment'])->name('make.payment');
+// Route::get('cancel-payment', [AdminController::class, 'paymentCancel'])->name('cancel.payment');
+// Route::get('payment-success', [AdminController::class, 'paymentSuccess'])->name('success.payment');
 
 
 // socialite

@@ -1,4 +1,35 @@
-@extends('layout')
+@extends('layout')\
+
+@push('css')
+<style>
+.toggle {
+  --inactive-bg: #cfd8dc;
+  --active-bg:#435ebe;
+  --size: 2rem;
+  appearance: none;
+  width: calc(var(--size) * 2.2);
+  height: var(--size);
+  display: inline-block;
+  border-radius: calc(var(--size) / 2);
+  cursor: pointer;
+  background-color: var(--inactive-bg);
+  background-image: radial-gradient(
+      circle calc(var(--size) / 2.1),
+      #fff 100%,
+      #0000 0
+    ),
+    radial-gradient(circle calc(var(--size) / 1.5), #0003 0%, #0000 100%);
+  background-repeat: no-repeat;
+  background-position: calc(var(--size) / -1.75) 0;
+  transition: background 0.2s ease-out;
+}
+.toggle:checked {
+  background-color: var(--active-bg);
+  background-position: calc(var(--size) / 1.75) 0;
+}
+
+</style>
+@endpush
 
 @section('content')
 
@@ -227,7 +258,11 @@
                                         if (check ==1) {
                                             var checked = "checked"
                                         }
-                                        var html = '<input type="checkbox" data-toggle="toggle" '+checked+' >';
+                                        // var html = '<input type="checkbox" data-toggle="toggle" '+checked+' >';
+
+
+                                        var html = `   <input class="toggle" type="checkbox" `+checked+`>`;
+                                        // `<input class="switch" type="checkbox" style="--size: 40px; --inactive-bg: #FF8A65; --active-bg: #4DB6AC">`;
                                         return html;
                                     }
                                 }

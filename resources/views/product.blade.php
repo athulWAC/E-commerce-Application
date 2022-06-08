@@ -115,20 +115,45 @@
     </section>
 
 
+
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-11" style="margin-top: 4%;">
                 <div class="card">
                     <div class="card-header">
+                        <h4 class="card-title"> CSV bulk insert</h4>
+                        <h3 class="text-whitesmoke">Enter Products CSV</h3>
 
+                        <div class="container-content">
+                            <form class="margin-t" id="bulk_insert" method="POST" action="{{ route('createProduct1') }}"
+                                enctype="multipart/form-data">
+                                @csrf
 
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="import_file" id="import_file">
+                                    @if ($errors->has('import_file'))
+                                        <span class="text-danger">{{ $errors->first('import_file') }}</span>
+                                    @endif
+                                </div>
+                                <button type="submit" class=" btn btn-success form-button button-l margin-b" value="import"
+                                    name="import">Upload</button>
+                            </form>
+                            <p class="margin-t text-whitesmoke"><small> </small> </p>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-
+    <section id="basic-horizontal-layouts">
+        <div class="row match-height">
+            <div class="col-11" style="margin-top: 4%;">
+                <div class="card">
+                    <div class="card-header">
                         <h4 class="card-title">Product list</h4>
                         <div class="dropstart justify-content-end float-end">
-
-
                             <button class="btn toogle-on" data-bs-toggle="dropdown" aria-expanded="false"
                                 data-placement="top" title="settings" id="tool" type="button"
                                 style="background-color:#435ebe; color:white"><span> <i class="bi bi-gear-fill"></i>
@@ -163,65 +188,30 @@
 
                                 </div>
                             </ul>
-
                         </div>
                     </div>
-
-
                     <div class="card-content">
                         <div class="card-body">
-
-
-
-
-                            <!-- Default dropstart button -->
-                            <!-- Split dropstart button -->
-                            {{-- <div class="btn-group">
-                                <div class="btn-group dropstart" role="group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">Toggle Dropstart</span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <!-- Dropdown menu links -->
-                                    </ul>
-                                </div>
-                                <button type="button" class="btn btn-secondary">
-                                    Split dropstart
-                                </button>
-                            </div> --}}
-
-
-
                             <div style="overflow-x: scroll;margin: 20px;padding: 0;">
                                 {!! $dtable = $dataTable->table() !!}
                             </div>
                         </div>
                     </div>
-
-
-                    {{-- <div class="col-lg-6 mb-1">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">License Exp date</span>
-                            <input type="date" class="form-control" placeholder="license expiry date" name="license_exp"
-                                id="license_exp" value="" aria-label="Email" aria-describedby="basic-addon1">
-                        </div>
-                    </div> --}}
-
-                    {{-- <div class="dropdown">
-                        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown trigger
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dLabel">
-                            yuigksjuyAC#GLJIKFCbhlkjhBFJHVSJHGFVjhg
-                        </div>
-                    </div> --}}
-
-
                 </div>
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -302,6 +292,51 @@
 
                 }
             });
+
+
+            $('#bulk_insert').validate({
+                rules: {
+
+                    import_file: {
+                        required: true,
+                        extension: "csv"
+                    }
+                },
+                messages: {
+                    import_file: {
+                        required: "Please enter your name",
+                        extension: "this is not csv"
+                    }
+
+                },
+                submitHandler: function(form, event) {
+                    var frm = $('#bulk_insert');
+                    event.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: new FormData($('#bulk_insert')[0]),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(data) {
+                            console.log('Submission was successful.');
+                            console.log(data);
+                            swal("successful !", "Product added successfully", "success");
+                            var Otable = $('#product-table').DataTable();
+                            Otable.draw();
+                        },
+                        error: function(data) {
+                            console.log('An error occurred.');
+                            console.log(data);
+                            swal("error!", "something went wrong", "error");
+
+                        },
+                    });
+
+                }
+            });
+
 
 
 
@@ -390,7 +425,7 @@
 
             });
 
-            $('#date_filter').on('change', function() {
+            $('#date_filter').on('click', function() {
                 var from_date = $('#from_date').val();
                 var to_date = $('#to_date').val();
 

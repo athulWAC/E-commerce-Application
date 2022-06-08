@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
+use function GuzzleHttp\Promise\each;
+
 class ProductSeeder extends Seeder
 {
     /**
@@ -31,20 +33,24 @@ class ProductSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 1432,
             ]
-
-
         ];
-
-
 
         foreach ($products as $product) {
             Product::create($product);
         }
 
+        // $count = 20000;
+        // for ($i = 0; $i < $count; $i++) {
 
+        //     $products = [
 
+        //         'name' => 'procuct' . $i,
+        //         'category_id' => rand(2, 3),
+        //         'price' => 100,
+        //         'size' => 1,
 
-
-        // Product::create($product);
+        //     ];
+        //     Product::create($products);
+        // }
     }
 }

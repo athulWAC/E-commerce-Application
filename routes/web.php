@@ -48,6 +48,7 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
     // products
     Route::get('product', [AdminController::class, 'product'])->name('product');
     Route::post('product/create', [AdminController::class, 'createProduct'])->name('createProduct');
+    Route::post('product/csv-insert', [AdminController::class, 'createProduct1'])->name('createProduct1');
     Route::get('product/edit/{id}', [AdminController::class, 'editProduct'])->name('editProduct');
     Route::post('product/update', [AdminController::class, 'updateProduct'])->name('updateProduct');
     Route::post('product/delete', [AdminController::class, 'deleteProduct'])->name('deleteProduct');

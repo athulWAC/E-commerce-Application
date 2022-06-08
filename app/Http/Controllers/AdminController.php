@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductDatatable;
+use App\Http\Requests\ProductRequest;
+use App\Jobs\CsvProductQueueJob;
+use App\Jobs\CsvProductQueueMail;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -14,6 +17,7 @@ use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -113,17 +117,11 @@ class AdminController extends Controller
     public function createProduct(Request $request)
     {
 
-
         $request->validate([
             'name' => 'required',
 
         ]);
-
         $product = AdminRepos::ProductInsert($request);
-
-
-
-
         $user = User::first();
         $message = [
             'greeting' => 'Hi ' . $user->name . ',',
@@ -138,6 +136,26 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+
+
+    public function createProduct1(ProductRequest $request)
+    {
+
+        // dd('not validated');
+        $path = $request->file('import_file')->getRealPath();
+        $data = array_map('str_getcsv', file($path));
+        foreach ($data as $csv_file) {
+            Product::create([
+                'name' => $csv_file[0],
+                'category_id' => $csv_file[1],
+                'price' => $csv_file[2]
+            ]);
+        }
+
+        $data = "data inserted";
+        CsvProductQueueJob::dispatch($data);
+        return;
+    }
 
 
     public function editProduct(Request $request, $id)

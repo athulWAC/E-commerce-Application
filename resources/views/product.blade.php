@@ -1,7 +1,7 @@
 @extends('layout')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('public/assets/css/glyphicon.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('public/assets/css/glyphicon.css') }}"> --}}
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
@@ -88,11 +88,6 @@
                                         <div class="col-md-8 form-group ">
 
                                             <input type="hidden" name="size" id="size" value="1">
-                                            {{-- <select class="form-select" id="size" name="size">
-                                                <option value="">Select a size</option>
-                                                <option value="1">SM</option>
-                                            </select> --}}
-
                                         </div>
                                         {{-- <button id="bt">tt</button> --}}
                                         <div class="col-md-4">
@@ -102,16 +97,6 @@
                                             <input type="number" id="price" class="form-control" name="price"
                                                 placeholder="price">
                                         </div>
-
-                                        {{-- <div class="col-12 col-md-8 offset-md-4 form-group">
-                                            <div class="form-check">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="checkbox1" class="form-check-input"
-                                                        checked="">
-                                                    <label for="checkbox1">Remember Me</label>
-                                                </div>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
@@ -135,41 +120,93 @@
             <div class="col-11" style="margin-top: 4%;">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Product list</h4>
-                        <p class="text-end">
-                            <i class="bi bi-gear-fill btn toogle-on" data-toggle="tooltip" data-placement="top"
-                                title="settings" id="tool"></i>
-                        </p>
 
+
+
+
+
+                        <h4 class="card-title">Product list</h4>
+                        <div class="dropstart justify-content-end float-end">
+
+
+                            <button class="btn toogle-on" data-bs-toggle="dropdown" aria-expanded="false"
+                                data-placement="top" title="settings" id="tool" type="button"
+                                style="background-color:#435ebe; color:white"><span> <i class="bi bi-gear-fill"></i>
+                                    FILTER</span></button>
+
+                            <ul class="dropdown-menu" style="width: 350px; height:300px;">
+                                {{-- content of drop down --}}
+                                <div class="row">
+                                    <div class="col" style="padding: 10%">
+                                        <li>
+                                            <span> ADDED FROM : </span>
+                                            <div class='input-group ' id='datetimepicker2'>
+                                                <input type='text' class="form-control input-group-addon" id="from_date"
+                                                    placeholder="Product added date from" name="license_exp" value="" />
+                                            </div><br>
+                                        </li>
+                                        <li>
+                                            <span> ADDED TO : </span>
+                                            <div class='input-group ' id='datetimepicker3'>
+                                                <input type='text' class="form-control input-group-addon" id="to_date"
+                                                    placeholder="Product added date to" name="license_exp" value="" />
+                                            </div><br>
+                                        </li>
+                                        <li>
+                                            <div class='input-group' id='datebutton'>
+                                                <input type='button' class="form-control btn btn-primary" id="date_filter"
+                                                    value="filter" />
+                                            </div>
+                                        </li>
+                                    </div>
+                                    {{-- dropdown end --}}
+
+                                </div>
+                            </ul>
+
+                        </div>
                     </div>
 
 
                     <div class="card-content">
                         <div class="card-body">
-                            <div class="row">
-                                <div class=" col-2">
-                                    <div class='input-group date' id='datetimepicker2'>
-                                        From <input type='text' class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon bi bi-calendar2-minus"></span>
-                                        </span>
-                                    </div>
+
+
+
+
+                            <!-- Default dropstart button -->
+                            <!-- Split dropstart button -->
+                            {{-- <div class="btn-group">
+                                <div class="btn-group dropstart" role="group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropstart</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <!-- Dropdown menu links -->
+                                    </ul>
                                 </div>
-                                <div class="col-2">
-                                    <div class='input-group date' id='datetimepicker3'>
-                                        To <input type='text' class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon bi bi-calendar2-minus-fill"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                                <button type="button" class="btn btn-secondary">
+                                    Split dropstart
+                                </button>
+                            </div> --}}
+
+
 
                             <div style="overflow-x: scroll;margin: 20px;padding: 0;">
                                 {!! $dtable = $dataTable->table() !!}
                             </div>
                         </div>
                     </div>
+
+
+                    {{-- <div class="col-lg-6 mb-1">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">License Exp date</span>
+                            <input type="date" class="form-control" placeholder="license expiry date" name="license_exp"
+                                id="license_exp" value="" aria-label="Email" aria-describedby="basic-addon1">
+                        </div>
+                    </div> --}}
 
                     {{-- <div class="dropdown">
                         <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -197,8 +234,6 @@
 
     <script type="text/javascript">
         $(function() {
-
-
 
             $('#datetimepicker2').datetimepicker();
             $('#datetimepicker3').datetimepicker({
@@ -355,13 +390,23 @@
 
             });
 
+            $('#date_filter').on('change', function() {
+                var from_date = $('#from_date').val();
+                var to_date = $('#to_date').val();
+
+                $("#product-table")
+                    .DataTable()
+                    .column(6)
+                    .search(
+                        JSON.stringify({
+                            start: from_date,
+                            end: to_date,
+                        })
+                    )
+                    .draw();
+            });
         });
 
     </script>
-
-
-
-
-
 
 @endpush

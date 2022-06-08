@@ -6,6 +6,7 @@ namespace App\DataTables;
 
 use App\Models\Category;
 use App\Models\Product;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -46,6 +47,27 @@ class ProductDatatable extends DataTable
 
             return  $dt;
         });
+
+
+        $dataTable->filterColumn('products.created_at', function ($query, $keyword) {
+            $json = json_decode($keyword, true);
+            if (!isset($json)) {
+                $query->where('products.created_at', 'like', '%' . $keyword . '%');
+            }
+            if (isset($json['start']) && $json['start']) {
+                $query->where('products.created_at', '>=', Carbon::parse($json['start'])->startOfDay());
+            }
+            if (isset($json['end']) && $json['end']) {
+                $query->where('products.created_at', '<=', Carbon::parse($json['end'])->endOfDay());
+            }
+        });
+
+
+
+
+
+
+
 
 
         $dataTable->addColumn('image', function (Product $product) {
@@ -121,7 +143,7 @@ class ProductDatatable extends DataTable
             Column::make('product_name')->name('products.name')->title('Product')->orderable(false),
             Column::make('category_name')->name('categories.name')->title('Category')->orderable(false),
             Column::make('price')->orderable(false),
-            Column::make('created_at')->title('Added_date')->orderable(false),
+            Column::make('created_at')->name('products.created_at')->title('Added_date')->orderable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

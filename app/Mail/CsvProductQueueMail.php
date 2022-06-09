@@ -31,6 +31,8 @@ class CsvProductQueueMail extends Mailable
     {
 
         $mail =  $this->view('mail.csv-mail');
+        \Log::info('hi');
+
 
         return $mail->subject('CSV Insert')
             ->with([

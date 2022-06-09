@@ -28,6 +28,8 @@
   background-position: calc(var(--size) / 1.75) 0;
 }
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+
 </style>
 @endpush
 
@@ -75,9 +77,9 @@
 
                                         <div class="col-4 mb-1" style="width: 250px">
                                             <div class="input-group mb-3" >
-                                                <label class="input-group-text" for="state">Product* </label>
-                                                <select class="form-select product_select" id="product0" data-id="amount0" name="product[]" >
-                                                    <option value=" ">Select a Product</option>
+                                                {{-- <label class="input-group-text" for="state">Product* </label> --}}
+                                                <select class="form-select product_select selectpicker" data-show-subtext="true" data-live-search="true" id="product0" data-id="amount0" name="product[]" >
+                                                        <option value=" ">Select a Product</option>
                                                     @foreach ($products as $product)
                                                         <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                     @endforeach
@@ -173,6 +175,7 @@
 
 @push('JS')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js" integrity="sha512-yrOmjPdp8qH8hgLfWpSFhC/+R9Cj9USL8uJxYIveJZGAiedxyIxwNw4RsLDlcjNlIRR4kkHaDHSmNHAkxFTmgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <script type="text/javascript">
@@ -261,7 +264,7 @@
                                         // var html = '<input type="checkbox" data-toggle="toggle" '+checked+' >';
 
 
-                                        var html = `   <input class="toggle" type="checkbox" `+checked+`>`;
+                                        var html = `   <input class='toggle order_status' id='`+row.order_id+`' type='checkbox' data-id='`+checked+`' `+checked+`>`;
                                         // `<input class="switch" type="checkbox" style="--size: 40px; --inactive-bg: #FF8A65; --active-bg: #4DB6AC">`;
                                         return html;
                                     }
@@ -360,6 +363,24 @@
             });
 
 
+// order status
+
+            $(document).on('click','.order_status',function(e) {
+                     var id =  $(this).attr('id');
+                     var checked =  $(this).data('id');
+                     $.ajax({
+                        type: "POST",
+                        url: "{{ route('changeStatus') }}",
+                        data: {id : id , status : checked },
+                        success: function(data) {
+                            swal("successful !", "Order Status is changed", "success");
+                        },
+                        error: function(data) {
+                            swal("error!", "Something went wrong", "error");
+                        },
+                    });
+
+                    });
 
 
             // add total amount
@@ -398,7 +419,7 @@
                 }else{
                     var quantity = 1;
                 }
-// alert(quantity);
+                                            // alert(quantity);
 
                 $.ajax({
                         type: "POST",

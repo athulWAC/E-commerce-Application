@@ -135,8 +135,15 @@
                                         <span class="text-danger">{{ $errors->first('import_file') }}</span>
                                     @endif
                                 </div>
+
+
                                 <button type="submit" class=" btn btn-success form-button button-l margin-b" value="import"
-                                    name="import">Upload</button>
+                                    name="import">Upload
+                                    <span class="spinner-border spinner-border-sm" style="display: none" id="upload_spinner"
+                                        role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </span>
+                                </button>
                             </form>
                             <p class="margin-t text-whitesmoke"><small> </small> </p>
                         </div>
@@ -155,9 +162,9 @@
                         <h4 class="card-title">Product list</h4>
                         <div class="dropstart justify-content-end float-end">
                             <button class="btn toogle-on" data-bs-toggle="dropdown" aria-expanded="false"
-                                data-placement="top" title="settings" id="tool" type="button"
-                                style="background-color:#435ebe; color:white"><span> <i class="bi bi-gear-fill"></i>
-                                    FILTER</span></button>
+                                data-placement="top" title="settings" id="tool" type="button" tabindex="0"
+                                style="background-color:#435ebe; color:white">
+                                <span> <i class="bi bi-gear-fill"></i> FILTER </span></button>
 
                             <ul class="dropdown-menu" style="width: 350px; height:300px;">
                                 {{-- content of drop down --}}
@@ -201,19 +208,6 @@
             </div>
         </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @endsection
@@ -294,6 +288,8 @@
             });
 
 
+
+
             $('#bulk_insert').validate({
                 rules: {
 
@@ -310,6 +306,10 @@
 
                 },
                 submitHandler: function(form, event) {
+
+                    // $('#bulk_insert').on('click', function() {
+                    $('#upload_spinner').attr('style', 'display: inline-block');
+                    // });
                     var frm = $('#bulk_insert');
                     event.preventDefault();
                     $.ajax({
@@ -323,6 +323,7 @@
                             console.log('Submission was successful.');
                             console.log(data);
                             swal("successful !", "Product added successfully", "success");
+                            $('#upload_spinner').attr('style', 'display: none');
                             var Otable = $('#product-table').DataTable();
                             Otable.draw();
                         },
@@ -369,6 +370,7 @@
                     },
                 });
             });
+
 
 
 

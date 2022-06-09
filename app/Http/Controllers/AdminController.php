@@ -37,9 +37,19 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function changeStatus(Request $request)
     {
-        //
+        $id = $request->id;
+        if ($request->status == null) {
+            $status = 1;
+        } else {
+            $status = 2;
+        }
+        // dd($request->id);
+        Order::where('id', $id)->update([
+            "status" => $status
+        ]);
+        return;
     }
 
 
@@ -267,7 +277,6 @@ class AdminController extends Controller
     public function order()
     {
         $products = Product::get();
-
         $product_id = 3;
         $order = Order::with('orderDetails')
             ->whereHas('orderDetails', function ($query) use ($product_id) {
@@ -344,12 +353,5 @@ class AdminController extends Controller
     {
         Auth::logout();
         return view('login');
-    }
-
-    // notification
-
-    public function notification()
-    {
-        return view('notification');
     }
 }

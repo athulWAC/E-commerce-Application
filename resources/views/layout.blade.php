@@ -106,7 +106,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item ">
+                        <li class="sidebar-item {{ Request::is('razoerpay-order') ? 'active' : null }}">
                             <a href="{{ route('razorpayOrder') }}" class='sidebar-link'>
                                 <i class="bi bi-box-seam"></i>
                                 <span>rayzorpay 2.0</span>
@@ -127,20 +127,19 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item  ">
+                        {{-- <li class="sidebar-item  ">
                             <a href="{{ route('notification') }}" class='sidebar-link'>
                                 <i class="bi bi-bell-fill"></i>
                                 <span>notification</span>
                             </a>
-                        </li>
+                        </li> --}}
 
-                        <li class="sidebar-item  ">
+                        {{-- <li class="sidebar-item  ">
                             <a href="{{ route('notification') }}" class='sidebar-link'>
-                                {{-- <i class="bi bi-bell-fill"></i> --}}
                                 <i class="bi bi-gear-fill"></i>
                                 <span>settings</span>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li class="sidebar-title"> Controls</li>
 

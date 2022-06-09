@@ -30,6 +30,32 @@ class RazorpayController extends Controller
     }
 
 
+
+
+    public function payment(Request $request)
+    {
+        dd($request);
+        $input = $request->all();
+        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+
+        $payment = $api->payment->fetch($request->razorpay_payment_id);
+
+        $payInfo = [
+            'payment_id' => $request->razorpay_payment_id,
+            'user_id' => '1',
+            'amount' => $request->amount,
+        ];
+
+        Payment::insertGetId($payInfo);
+
+        \Session::put('success', 'Payment successful');
+
+        return response()->json(['success' => 'Payment successful']);
+    }
+
+
+
+
     public function confirm(Request $request)
     {
         // dd(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'), env('MAIL_FROM_ADDRESS'));
@@ -111,31 +137,5 @@ class RazorpayController extends Controller
 
         dd('hi');
         // return  $data;
-    }
-
-
-
-
-
-
-    public function payment(Request $request)
-    {
-        dd($request);
-        $input = $request->all();
-        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-
-        $payment = $api->payment->fetch($request->razorpay_payment_id);
-
-        $payInfo = [
-            'payment_id' => $request->razorpay_payment_id,
-            'user_id' => '1',
-            'amount' => $request->amount,
-        ];
-
-        Payment::insertGetId($payInfo);
-
-        \Session::put('success', 'Payment successful');
-
-        return response()->json(['success' => 'Payment successful']);
     }
 }

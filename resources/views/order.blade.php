@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"/>
 
+/* https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css */
 </style>
 @endpush
 
@@ -80,7 +81,7 @@
                                         <div class="col-4 mb-1" style="width: 250px">
                                             <div class="input-group mb-3" >
                                                 {{-- <label class="input-group-text" for="state">Product* </label> --}}
-                                                <select class="form-select product_select selectpicker" data-show-subtext="true" data-live-search="true" id="product0" data-id="amount0" name="product[]" >
+                                                <select class=" product_select selectpicker" data-show-subtext="true" data-live-search="true" id="product0" data-id="amount0" name="product[]" >
                                                         <option value=" ">Select a Product</option>
                                                     @foreach ($products as $product)
                                                         <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -190,6 +191,8 @@
 
             var table = $('#orderTable').DataTable({
                 dom: 'Bfrtip'
+                ,"ordering": false
+                ,"searching": false
                     ,buttons: [
 
                                     {
@@ -235,7 +238,7 @@
                                 [10, 15, 25, 35, 50, 100, -1]
                                 , [10, 15, 25, 35, 50, 100, "All"]
                             ]
-                            , "bLengthChange": false
+
                             , bInfo: false
                             , "ajax": {
                                 "url": "{{ route('orderDatatable') }}"
@@ -290,7 +293,6 @@
                                     data: null
                                     , render: function(row) {
                                         var html = `
-
                                         <button type="button" data-id="${row.order_id}" class=" deleteOrder sidebar-link btn col-1 " title="delete"><i class="bi bi-trash"></i>
                                         </button>
                                         <a href="{{url('invoice')}}/${row.invoice_id}" type="button" title="invoice" data-id="${row.order_id}" class=" viewInvoice sidebar-link btn col-1" id="print"><i class="bi bi-receipt"></i></i></button>

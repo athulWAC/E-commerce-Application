@@ -64,13 +64,12 @@ class AdminRepos
     public static function Productdelete($request)
     {
 
+        $count = 0;
         foreach ($request->id as $id) {
-            // $id = $request->id;
+            $count = $count + 1;
             Product::where('id', $id)->delete();
         }
-
-
-        return;
+        return $count;
     }
 
 

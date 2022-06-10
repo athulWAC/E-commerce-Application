@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ForgotpasswordController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\RazorpayPaymentController;
 use App\Http\Controllers\SmsMsgController;
@@ -83,16 +84,15 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
     // Route::get('cancel-payment', [AdminController::class, 'paymentCancel'])->name('cancel.payment');
     // Route::get('payment-success', [AdminController::class, 'paymentSuccess'])->name('success.payment');
 
-
-    // socialite
-    Route::get('/auth/redirect/{provider}', [GoogleLoginController::class, 'redirect'])->name('google.redirect');
-    Route::get('callback/{provider}', [GoogleLoginController::class, 'callback'])->name('google.callback');
-
-
     Route::get('send-sms-notification', [SmsMsgController::class, 'sendSmsToMobile'])->name('vonage');
     // Route::get('send-sms-notification1', [SmsMsgController::class, 'sendSmsToMobile1'])->name('sms1');
     Route::get('send-sms-notification1', [SmsMsgController::class, 'sendMessage'])->name('twilio');
+    Route::get('/generate-qrcode', [QrCodeController::class, 'index'])->name('qr');
 });
+
+// socialite
+Route::get('/auth/redirect/{provider}', [GoogleLoginController::class, 'redirect'])->name('google.redirect');
+Route::get('callback/{provider}', [GoogleLoginController::class, 'callback'])->name('google.callback');
 
 
 

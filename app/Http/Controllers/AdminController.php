@@ -118,7 +118,6 @@ class AdminController extends Controller
     {
         $products = Product::with('category')->get();
 
-        // dd($products);
         $categories = Category::get();
         return $dataTable->render('product', compact('products', 'categories'));
     }
@@ -188,8 +187,9 @@ class AdminController extends Controller
     public function deleteProduct(Request $request)
     {
         // dd($request);
-        AdminRepos::Productdelete($request);
-        return redirect()->route('product');
+        $count =  AdminRepos::Productdelete($request);
+        // dd($count);
+        return $count;
     }
 
     public function orderDatatable(Request $request)

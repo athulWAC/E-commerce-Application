@@ -52,17 +52,7 @@
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
                         </div>
-
-                        {{-- <div class="form-check form-check-lg d-flex align-items-end">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                                Keep me logged in
-                            </label>
-                        </div> --}}
-
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
-
-
                         <div class="text-center mt-5 text-lg fs-4">
                             {{-- <p class="text-gray-600">Don't have an account? <a href="auth-register.html" class="font-bold">Sign
                         up</a>.</p> --}}
@@ -73,7 +63,6 @@
                                 This is a danger alert.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div> --}}
-
                         @if (Session::has('error'))
                             <div
                                 class="alert alert-danger alert-dismissible show fade {{ Session::has('error') ? 'alert-important' : '' }}">
@@ -91,13 +80,17 @@
                                         class="bi bi-github"></i></a></span>&nbsp;&nbsp;
                             <span> <a href="{{ url('/auth/redirect/google') }}"><i
                                         class="bi bi-google"></i></a></span>
-
                         </div>
                     </div>
 
+                    <div class="form-group row mb-0" style="padding:5%">
+                        <div class="col d-flex justify-content-center">
 
+                            {{-- <span><i class="bi bi-credit-card-2-back"></i> paytm </span> --}}
+                            {!! QrCode::size(150)->generate('In a building phase') !!}
 
-
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -111,7 +104,7 @@
     </div>
 
     <script>
-        $('div.alert').not('.alert-important').delay(3000).slideUp(300);
+        // $('div.alert').not('.alert-important').delay(3000).slideUp(300);
 
     </script>
     <script src="{{ asset('public/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js ') }}">

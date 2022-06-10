@@ -357,7 +357,9 @@
                     success: function(data) {
                         console.log('Submission was successful.');
                         console.log(data);
-                        swal("successful !", "Product deleted successfully", "success");
+                        swal("successful !", "Product deleted successfully",
+                            "success");
+                        // swal('Testing', 'Choose an item', { content: choices })
                         var Otable = $('#product-table').DataTable();
                         Otable.draw();
 
@@ -377,11 +379,9 @@
 
             $(document).on('click', '.dt_parent_select', function() {
                 // var parent_checked = $('.dt_parent_select').attr('checked', true);
-
                 if ($('.dt_parent_select').prop('checked')) {
                     $('.dt_child_select').prop('checked', true);
                     // $(".buttons-delete").attr('style', 'background-color:#435ebe');
-
                     // alert('hey');
                 } else {
                     $('.dt_child_select').prop('checked', false);
@@ -390,15 +390,11 @@
             });
 
             $(document).on('click', '.buttons-delete', function() {
-
-
                 var check_id = $(".dt_child_select:checked").map(function() {
                     return $(this).data('id');
                 }).get();
-
                 if (check_id.length === 0) {
                     swal("No Selections!", "Select anything to delete ", "error");
-
                 } else {
                     console.log(check_id);
                     $.ajax({
@@ -410,8 +406,16 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
-                            swal("successful !", "Product deleted successfully",
-                                "success");
+                            if (data > 1) {
+
+                                swal("successful !", "deleted " + data + " items successfully!",
+                                    "success");
+                            } else {
+                                swal("successful !", " item deleted successfully!",
+                                    "success");
+                            }
+                            // swal("successful !", "Product deleted successfully",
+                            //     "success");
                             // product-table
                             var Otable = $('#product-table').DataTable();
                             Otable.draw();
@@ -422,15 +426,12 @@
                             swal("error!", "something went wrong", "error");
                         },
                     });
-
                 }
-
             });
 
             $('#date_filter').on('click', function() {
                 var from_date = $('#from_date').val();
                 var to_date = $('#to_date').val();
-
                 $("#product-table")
                     .DataTable()
                     .column(6)

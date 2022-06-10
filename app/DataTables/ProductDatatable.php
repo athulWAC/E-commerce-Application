@@ -73,6 +73,7 @@ class ProductDatatable extends DataTable
         $dataTable->addColumn('image', function (Product $product) {
             $id  = $product->id;
             $image  = $product->image;
+            // $image = "storage\app\assets\products\\";
             $url = "storage\app\assets\products";
             // dd($url);
             return '<div class="avatar avatar-lg me-3">
@@ -80,7 +81,6 @@ class ProductDatatable extends DataTable
             <img src="storage\app\assets\products\\' . $image . '" alt="" srcset=""> </a>
             </div>';
         });
-
         $dataTable->rawColumns(['select', 'action', 'image']);
         return $dataTable;
     }

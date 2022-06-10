@@ -127,12 +127,12 @@
                             </a>
                         </li>
 
-                        {{-- <li class="sidebar-item  ">
-                            <a href="{{ route('notification') }}" class='sidebar-link'>
-                                <i class="bi bi-bell-fill"></i>
-                                <span>notification</span>
+                        <li class="sidebar-item  ">
+                            <a href="{{ route('qr') }}" class='sidebar-link'>
+                                <i class="bi bi-qr-code"></i>
+                                <span>Qr Code </span>
                             </a>
-                        </li> --}}
+                        </li>
 
                         {{-- <li class="sidebar-item  ">
                             <a href="{{ route('notification') }}" class='sidebar-link'>

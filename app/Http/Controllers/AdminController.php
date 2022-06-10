@@ -194,9 +194,9 @@ class AdminController extends Controller
 
     public function orderDatatable(Request $request)
     {
-        // dd($request);
         $draw = $request->get('draw');
         $search = $request->get('search');
+        // dd($search);
         $statusfilter = $request->get('status');
         $statusfilter = $request->get('status');
         $sortColumn = $request->order[0]['column'] ?? 3;

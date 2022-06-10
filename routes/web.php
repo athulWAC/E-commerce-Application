@@ -57,7 +57,6 @@ Route::prefix('/')->middleware('LoginMiddleware')->group(function () {
     Route::get('order', [AdminController::class, 'order'])->name('order');
     Route::post('getamount', [AdminController::class, 'getAmount'])->name('getAmount');
     Route::post('changeStatus', [AdminController::class, 'changeStatus'])->name('changeStatus');
-
     Route::post('addOrder', [AdminController::class, 'addOrder'])->name('addOrder');
     Route::get('orderDatatable', [AdminController::class, 'orderDatatable'])->name('orderDatatable');
     Route::post('delete-order', [AdminController::class, 'deleteOrder'])->name('deleteOrder');

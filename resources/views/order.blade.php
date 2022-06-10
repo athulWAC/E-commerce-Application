@@ -29,6 +29,8 @@
 }
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"/>
 
 </style>
 @endpush
@@ -177,12 +179,54 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js" integrity="sha512-yrOmjPdp8qH8hgLfWpSFhC/+R9Cj9USL8uJxYIveJZGAiedxyIxwNw4RsLDlcjNlIRR4kkHaDHSmNHAkxFTmgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
     <script type="text/javascript">
         $(function() {
 
             var table = $('#orderTable').DataTable({
-                            "dom": 'lfrtip'
+                dom: 'Bfrtip'
+                    ,buttons: [
+
+                                    {
+                                        extend: 'pdfHtml5',
+                                        messageTop: 'Message for print',
+                                        title: 'Title Here',
+                                        orientation: 'landscape',
+                                        pageSize: 'LEGAL',
+                                        margin: [ 0, 0, 0, 12 ],
+                                        alignment: 'center',
+                                        exportOptions: {
+                                            columns: [ 0, 1, 2, 3, 4 ]
+                                        }
+                                    },
+                                    {
+                                        extend: 'print',
+                                        title: 'Title Here',
+                                        messageTop: 'message for print',
+                                        exportOptions: {
+                                            columns: [ 0, 1, 2, 3, 4 ]
+                                        }
+                                    },
+                                    {
+                                        extend: 'excel',
+                                        sheetName: 'Exported data'
+                                    }
+                                    // 'copy',
+                                    //  'excel',
+                                    //  'pdf',
+                                    //  'reload',
+                                    //  'reset'
+                                    //  ,'export'
+                                    //  ,'print'
+                                    //  ,'delete'
+                                    //  ,'pdfHtml5'
+
+                    ]
                             , "bAutoWidth": true
                             , "processing": true
                             , "serverSide": true
@@ -191,7 +235,6 @@
                                 [10, 15, 25, 35, 50, 100, -1]
                                 , [10, 15, 25, 35, 50, 100, "All"]
                             ]
-                            , searching: true
                             , "bLengthChange": false
                             , bInfo: false
                             , "ajax": {
@@ -201,7 +244,8 @@
                                 , "data": function(d) {
                                     d._token = "{{csrf_token()}}";
                                     // d.search = $('#js-search-input').val();
-                                    d.search = $("input[type=search]").val()
+                                    d.search = $('#js-search-input').val();
+                                    // d.search = $('input[type="search"]').val();
                                     d.status = $('#requests-status').val();
                                 }
                             }
@@ -276,7 +320,7 @@
                             ]
                             , 'columnDefs': [{
                                 'targets': [1]
-                                , 'orderable': false
+                                , 'orderable': true
                             }]
                             , "drawCallback": function() {
                                 $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
@@ -300,8 +344,8 @@
 
 
                 // var a = $('.product_select').last().data('id');
-                var a = $('.product_select').data('id');
-                var  count = a.replace ( /[^\d.]/g, '' );
+               var a = $('.product_select').data('id');
+               var  count = a.replace ( /[^\d.]/g, '' );
                var temp = 0;
                 while(temp>count){
                   x =  temp++;

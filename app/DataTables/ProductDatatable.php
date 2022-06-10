@@ -115,7 +115,7 @@ class ProductDatatable extends DataTable
             ->orderBy(1)
             ->parameters([
                 'dom' => 'Bfrtip',
-                'ordering' => false,
+                // 'ordering' => false,
                 'buttons' => [
                     'export',
                     'print',
@@ -137,12 +137,12 @@ class ProductDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('select')->title('<input type="checkbox" class="dt_parent_select" data-id="" data-toggle="toggle" >'),
-            Column::make('image'),
-            Column::make('id')->orderable(true),
-            Column::make('product_name')->name('products.name')->title('Product')->orderable(false),
-            Column::make('category_name')->name('categories.name')->title('Category')->orderable(false),
-            Column::make('price')->orderable(false),
+            Column::make('select')->title('<input type="checkbox" class="dt_parent_select" data-id="" data-toggle="toggle" >')->orderable(false),
+            Column::make('image')->orderable(false),
+            Column::make('id'),
+            Column::make('product_name')->name('products.name')->title('Product'),
+            Column::make('category_name')->name('categories.name')->title('Category'),
+            Column::make('price'),
             Column::make('created_at')->name('products.created_at')->title('Added_date')->orderable(false),
             Column::computed('action')
                 ->exportable(false)

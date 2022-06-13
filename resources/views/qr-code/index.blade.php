@@ -9,7 +9,7 @@
             <div class="col-11" style="margin-top: 4%;">
                 <div class="card float-left">
                     <div class="card-header">
-                        <h2>Simple QR Code</h2>
+                        <h2>Scan Code</h2>
                     </div>
                     <div class="card-body">
                         {!! QrCode::size(50)->generate('halo world') !!}

@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/')->middleware('LogoutMiddleware')->group(function () {
     Route::get('/', [AdminController::class, 'login'])->name('login');
 });
+
+Route::post('loginVal', [AdminController::class, 'loginVal'])->name('loginVal')->middleware("throttle:10,2");
+
 // forgot-password
 // Route::post('forgot-password/request', [ForgotpasswordController::class, 'forgotPasswordRequest'])->name('forgotPasswordRequest');
 // Route::get('forget-password', [ForgotpasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
@@ -35,7 +38,6 @@ Route::get('reset-password/{token}', [ForgotpasswordController::class, 'showRese
 Route::post('reset-password', [ForgotpasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
-Route::post('loginVal', [AdminController::class, 'loginVal'])->name('loginVal')->middleware("throttle:10,2");;
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
 
 

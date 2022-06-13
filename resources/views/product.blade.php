@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"> --}}
 
     <style>
@@ -194,6 +195,17 @@
                                     {{-- dropdown end --}}
 
                                 </div>
+                                <div class="row">
+
+                                    <li>
+                                        <span> Date range </span>
+                                        <div class='input-group ' id='datetimepicker4'>
+                                            <input type="text" class="form-control datetimes" id="datetimes"
+                                                name="datetimes" />
+                                        </div><br>
+                                    </li>
+
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -214,6 +226,36 @@
 
 @push('JS')
     {!! $dataTable->scripts() !!}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+
+            $('.datetimes').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                var from_date = start.format('DD-MM-YYYY');
+                var to_date = end.format('DD-MM-YYYY');
+
+                // console.log(from, to);
+
+                $("#product-table")
+                    .DataTable()
+                    .column(6)
+                    .search(
+                        JSON.stringify({
+                            start: from_date,
+                            end: to_date,
+                        })
+                    )
+                    .draw();
+
+            });
+
+
+        });
+
+    </script>
+
 
 
     <script type="text/javascript">
@@ -229,9 +271,7 @@
             $("#datetimepicker3").on("dp.change", function(e) {
                 $('#datetimepicker2').data("DateTimePicker").maxDate(e.date);
             });
-        });
 
-        $(function() {
 
             $('#productForm').validate({
                 // Specify validation rules
@@ -272,7 +312,8 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
-                            swal("successful !", "Product added successfully", "success");
+                            swal("successful !", "Product added successfully",
+                                "success");
                             var Otable = $('#product-table').DataTable();
                             Otable.draw();
                         },
@@ -322,7 +363,8 @@
                         success: function(data) {
                             console.log('Submission was successful.');
                             console.log(data);
-                            swal("successful !", "Product added successfully", "success");
+                            swal("successful !", "Product added successfully",
+                                "success");
                             $('#upload_spinner').attr('style', 'display: none');
                             var Otable = $('#product-table').DataTable();
                             Otable.draw();
@@ -408,7 +450,8 @@
                             console.log(data);
                             if (data > 1) {
 
-                                swal("successful !", "deleted " + data + " items successfully!",
+                                swal("successful !", "deleted " + data +
+                                    " items successfully!",
                                     "success");
                             } else {
                                 swal("successful !", " item deleted successfully!",
@@ -443,6 +486,7 @@
                     )
                     .draw();
             });
+
         });
 
     </script>
